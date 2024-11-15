@@ -1,3 +1,4 @@
+import 'package:fit_app/common/color_extension.dart';
 import 'package:flutter/material.dart';
 import 'screen/on_boarding/on_boarding_screen.dart';
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'fitness app',
       theme: ThemeData(
-  
+      primaryColor: ColorExtension.primaryColor1,
+      fontFamily: "Poppins"
       ),
       home: const OnBoardingScreen(),
     );
