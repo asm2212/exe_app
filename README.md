@@ -1,2 +1,2 @@
-# exc-app
+# fit-app
 sport for all app
