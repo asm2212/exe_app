@@ -1,5 +1,5 @@
 import 'package:fit_app/common/color_extension.dart';
-import 'package:fit_app/common_widgets/on_boarding_view.dart';
+import 'package:fit_app/common_widgets/on_boarding_widget.dart';
 import 'package:fit_app/screen/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +74,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             itemCount: pageArr.length,
             itemBuilder: (context, index) {
               var pObj = pageArr[index];
-              return OnBoardingView(pObj: pObj);
+              return OnBoardingWidget(pObj: pObj);
             },
           ),
 

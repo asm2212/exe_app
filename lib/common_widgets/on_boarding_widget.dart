@@ -1,9 +1,9 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingView extends StatelessWidget {
+class OnBoardingWidget extends StatelessWidget {
   final Map pObj;
-  const OnBoardingView({super.key, required this.pObj});
+  const OnBoardingWidget({super.key, required this.pObj});
 
   @override
   Widget build(BuildContext context) {
