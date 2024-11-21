@@ -1,7 +1,7 @@
 
 
 import 'package:fit_app/common/color_extension.dart';
-import 'package:fit_app/screen/register/register_screen.dart';
+import 'package:fit_app/screen/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
