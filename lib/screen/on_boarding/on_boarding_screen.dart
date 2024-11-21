@@ -1,5 +1,6 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/on_boarding_view.dart';
+import 'package:fit_app/screen/register/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -77,56 +78,61 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             },
           ),
 
-          // Circular Progress Indicator with next button
+          // SafeArea to handle overflow
           Positioned(
-            bottom: media.height * 0.01,
-            right: media.width * 0.05,
-            child: SizedBox(
-              width: 120,
-              height: 120,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Progress indicator
-                  SizedBox(
-                    width: 70,
-                    height: 70,
-                    child: CircularProgressIndicator(
-                      color: ColorExtension.primaryColor1,
-                      value: (selectPage + 1) / pageArr.length,
-                      strokeWidth: 2,
-                    ),
-                  ),
-                  // Next button
-                  GestureDetector(
-                    onTap: () {
-                      if (selectPage < pageArr.length - 1) {
-                        controller.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      } else {
-                        // Navigate to the home screen or next page
-                        print("Navigate to Home Screen");
-                      }
-                    },
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
+              bottom: media.height * 0.02,
+              right: media.width * 0.05,
+              child: SizedBox(
+                width: 120,
+                height: 120,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    // Progress indicator
+                    SizedBox(
+                      width: 70,
+                      height: 70,
+                      child: CircularProgressIndicator(
                         color: ColorExtension.primaryColor1,
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      child: Icon(
-                        Icons.navigate_next,
-                        color: ColorExtension.white,
+                        value: (selectPage + 1) / pageArr.length,
+                        strokeWidth: 2,
                       ),
                     ),
-                  ),
-                ],
+                    // Next button
+                    GestureDetector(
+                      onTap: () {
+                        if (selectPage < pageArr.length - 1) {
+                          controller.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterScreen(),
+                            ),
+                          );
+                        }
+                      },
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: ColorExtension.primaryColor1,
+                          borderRadius: BorderRadius.circular(35),
+                        ),
+                        child: Icon(
+                          Icons.navigate_next,
+                          color: ColorExtension.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          
         ],
       ),
     );

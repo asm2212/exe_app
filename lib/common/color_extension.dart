@@ -14,4 +14,5 @@ class ColorExtension {
   static Color get black => const Color(0xff1D1617);
   static Color get gray => const Color(0xff786F72);
   static Color get white => const Color(0xFFFFFFFF);
+  static Color get lightGray => const Color(0xffF7F8F8);
 }
