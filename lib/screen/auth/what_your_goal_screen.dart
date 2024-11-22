@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
-import 'package:fit_app/screen/auth/next_screen.dart';
+import 'package:fit_app/screen/auth/welcome_back_screen.dart';
 import 'package:flutter/material.dart';
 
 class WhatYourGoalScreen extends StatefulWidget {
@@ -133,7 +133,7 @@ class _WhatYourGoalScreenState extends State<WhatYourGoalScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NextScreen(),
+                          builder: (context) => const WelcomeBackScreen(),
                         ),
                       );
                     },

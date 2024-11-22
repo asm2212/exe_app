@@ -2,6 +2,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/round_textfield.dart';
 import 'package:fit_app/screen/auth/complete_profile_screen.dart';
+import 'package:fit_app/screen/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -214,7 +215,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                    
                   ),
                   TextButton(
-                    onPressed: (){},
+                    onPressed: (){
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                    },
                      child:Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
