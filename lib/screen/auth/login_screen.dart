@@ -92,8 +92,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "reset password",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: ColorExtension.primaryColor1
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  height: media.width * 0.5,
+                  height: media.width * 0.56,
                 ),
                 RoundButton(
                   title: "Login",
@@ -106,8 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                 ),
-                SizedBox(
-                  height: media.width * 0.03,
+              SizedBox( height: media.width * 0.02
                 ),
                 Row(
                   children: [
@@ -133,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: media.width * 0.03,
+                  height: media.width * 0.02,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

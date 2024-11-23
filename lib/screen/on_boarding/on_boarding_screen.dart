@@ -68,14 +68,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       body: Stack(
         alignment: Alignment.bottomRight,
         children: [
-          // PageView for onboarding pages
           PageView.builder(
-            controller: controller,
-            itemCount: pageArr.length,
-            itemBuilder: (context, index) {
-              var pObj = pageArr[index];
-              return OnBoardingWidget(pObj: pObj);
-            },
+          controller: controller,
+          itemCount: pageArr.length,
+          itemBuilder: (context,index){
+            var pObj = pageArr[index];
+            return OnBoardingWidget(pObj: pObj,);
+          },
           ),
 
           // SafeArea to handle overflow

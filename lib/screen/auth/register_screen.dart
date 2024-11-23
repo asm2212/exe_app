@@ -104,7 +104,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         size: 20,
                        )
                        ),
-                      
                           Expanded(
                            child: Text(
                             "By continuing you accept our terms and conditions",
@@ -114,7 +113,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                            ),
                          ),
-                       
                     ],
                   ),
                         SizedBox(
