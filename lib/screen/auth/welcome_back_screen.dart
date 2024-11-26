@@ -1,5 +1,4 @@
 import 'package:fit_app/common/color_extension.dart';
-import 'package:fit_app/screen/auth/register_screen.dart';
 import 'package:fit_app/screen/main_tab/main_tab_screen.dart';
 import 'package:flutter/material.dart';
 import '../../common_widgets/round_button.dart';
@@ -9,8 +8,9 @@ class WelcomeBackScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context).size;
 
+    final media = MediaQuery.of(context).size;
+    
     return Scaffold(
       backgroundColor: ColorExtension.white,
       body: SafeArea(

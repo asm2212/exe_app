@@ -1,5 +1,7 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/tab_button.dart';
+import 'package:fit_app/screen/home/blank_screen.dart';
+import 'package:fit_app/screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -11,10 +13,13 @@ class MainTabScreen extends StatefulWidget {
 
 class _MainTabScreenState extends State<MainTabScreen> {
   int selectTab = 0;
+  final PageStorageBucket pageBucket = PageStorageBucket();
+  Widget currentTab = const HomeScreen();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorExtension.white,
+      body: PageStorage(bucket: pageBucket,child:currentTab),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SizedBox(
         width: 70,
@@ -50,7 +55,9 @@ class _MainTabScreenState extends State<MainTabScreen> {
             color: ColorExtension.white,
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black12, blurRadius: 2, offset: Offset(0, -2)),
+                  color: Colors.black12, 
+                  blurRadius: 2,
+                   offset: Offset(0, -2)),
             ],
           ),
           height: kToolbarHeight,
@@ -63,6 +70,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/home_tab_select.png",
                   onTap: () {
                     selectTab = 0;
+                    currentTab = const HomeScreen();
                     if (mounted) {
                       setState(() {});
                     }
@@ -76,6 +84,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/activity_tab_select.png",
                   onTap: () {
                     selectTab = 1;
+                    currentTab = const BlankScreen();
                     if (mounted) {
                       setState(() {});
                     }
@@ -90,6 +99,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/camera_tab_select.png",
                   onTap: () {
                     selectTab = 2;
+                    currentTab = const BlankScreen();
                     if (mounted) {
                       setState(() {});
                     }
@@ -103,6 +113,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/profile_tab_select.png",
                   onTap: () {
                     selectTab = 3;
+                    currentTab = const BlankScreen();
                     if (mounted) {
                       setState(() {});
                     }
