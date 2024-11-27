@@ -326,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         List<int> spotIndexes) {
                                   return spotIndexes.map((index) {
                                     return TouchedSpotIndicatorData(
-                                      FlLine(
+                                      const FlLine(
                                         color: Colors.red,
                                       ),
                                       FlDotData(
@@ -364,10 +364,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               lineBarsData: lineBarsData,
                               minY: 0,
                               maxY: 130,
-                              titlesData: FlTitlesData(
+                              titlesData: const FlTitlesData(
                                 show: false,
                               ),
-                              gridData: FlGridData(show: false),
+                              gridData: const FlGridData(show: false),
                               borderData: FlBorderData(
                                 show: true,
                                 border: Border.all(
