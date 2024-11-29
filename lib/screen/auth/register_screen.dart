@@ -22,17 +22,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(top: 25,left: 25,right: 25),
               child: Column(
                 children: [
                   Text(
-                    "Hey there",
+                    "Hey there,",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: ColorExtension.gray,
                     ),
                   ),
+                  SizedBox(height: media .width*0.02),
                   Text(
                     "Create an Account",
                     style: TextStyle(
@@ -42,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: media.width * 0.05,
+                    height: media.width * 0.08,
                   ),
                   const RoundTextfield(
                       hintText: "First Name",

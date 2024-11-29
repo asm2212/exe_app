@@ -2,6 +2,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -381,6 +382,82 @@ class _HomeScreenState extends State<HomeScreen> {
                     
                       ),
                   ),
+                     
+                     SizedBox(height: media.width * 0.05),
+                     Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: media.width * 0.95 ,
+                            decoration: BoxDecoration(
+                              color: ColorExtension.white,
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: const[
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 2,
+                              )
+                              ]
+                            ),
+                            child: Row(
+                              children: [
+                                 SimpleAnimationProgressBar(
+                              height: media.width * 0.85,
+                              width: media.width * 0.07,
+                              backgroundColor: Colors.grey.shade100,
+                              foregrondColor: Colors.purple,
+                              ratio: 0.5,
+                              direction: Axis.vertical,
+                              curve: Curves.fastLinearToSlowEaseIn,
+                              duration: const Duration(seconds: 3),
+                              borderRadius: BorderRadius.circular(15) ,
+                              gradientColor: LinearGradient(
+                                  colors: ColorExtension.primaryG,
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter),
+                            ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: media.width * 0.05),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: media.width * 0.45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Colors.white,
+                                  boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 2,
+                                  )
+                                  ]
+                                ),
+                              ),
+                                 SizedBox(height: media.width * 0.05),
+                              Container(
+                                height: media.width * 0.45,
+                                decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(25),
+                                  color: Colors.white,
+                                  boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 2,
+                                  )
+                                  ]
+                                ),
+                              ),
+                            ],
+                          ))
+                      ],
+                     )
+                     ,     SizedBox(height: media.width * 0.05),
                     ]
                   )
               

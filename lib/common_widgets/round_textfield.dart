@@ -32,14 +32,14 @@ class RoundTextfield extends StatelessWidget {
                     obscureText: obscureText,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 15),
+                          vertical: 15, horizontal: 20),
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintText: hintText,
                       prefixIcon: Container(
                         alignment: Alignment.center,
-                        width: 20,
-                        height: 20,
+                        width: 30,
+                        height: 30,
                         child: Image.asset(
                           icon,
                           width: 20,

@@ -19,9 +19,9 @@ class OnBoardingWidget extends StatelessWidget {
                 pObj["image"].toString(),
                 width: media.width,
                 ),
-                SizedBox(height: media.width*0.1,),
+                SizedBox(height: media.width*0.2,),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
                  pObj["title"].toString(),
                   style: TextStyle(
@@ -31,13 +31,14 @@ class OnBoardingWidget extends StatelessWidget {
                   ),
                 ),
                 ),
+                const SizedBox(height: 10,),
                  Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
                   pObj["subtitle"].toString(),
                   style: TextStyle(
                     color: ColorExtension.gray,
-                    fontSize: 12,
+                    fontSize: 15,
                   ),
                 ),
                 ),

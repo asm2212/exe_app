@@ -18,13 +18,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     {
       "title": "Track Your Goal",
       "subtitle":
-          "Don't worry if you have trouble determining your goals, we can help you determine and track them.",
+          "Don't worry if you have trouble determining your goals, we will help you determine your goals and track your goals.",
       "image": "assets/images/on_1.png",
     },
     {
       "title": "Get Burn",
       "subtitle":
-          "Let's keep burning your goals. We can help you determine and track them.",
+          "Let's keep burning to achieve your goals ,it hurts only temporarily,if you give up now you will in pain forever",
       "image": "assets/images/on_2.png",
     },
     {
