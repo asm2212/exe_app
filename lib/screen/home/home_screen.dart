@@ -1,8 +1,10 @@
+import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,8 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-   List<int> showingTooltipOnSpots = [21];
+  List<int> showingTooltipOnSpots = [21];
 
   List<FlSpot> get allSpots => const [
         FlSpot(0, 20),
@@ -49,11 +50,34 @@ class _HomeScreenState extends State<HomeScreen> {
         FlSpot(30, 40)
       ];
 
+  List waterArr = [
+    {
+      "title": "6am - 8am",
+      "subtitle": "600ml",
+    },
+    {
+      "title": "8am - 11am",
+      "subtitle": "500ml",
+    },
+    {
+      "title": "11am - 2pm",
+      "subtitle": "1000ml",
+    },
+    {
+      "title": "2pm - 4pm",
+      "subtitle": "700ml",
+    },
+    {
+      "title": "4pm - now",
+      "subtitle": "900ml",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
 
-      final lineBarsData = [
+    final lineBarsData = [
       LineChartBarData(
         showingIndicators: showingTooltipOnSpots,
         spots: allSpots,
@@ -66,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ColorExtension.primaryColor1.withOpacity(0.1),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
-        dotData:const FlDotData(show: false),
+        dotData: const FlDotData(show: false),
         gradient: LinearGradient(
           colors: ColorExtension.primaryG,
         ),
@@ -76,398 +100,660 @@ class _HomeScreenState extends State<HomeScreen> {
     final tooltipsOnBar = lineBarsData[0];
 
     return Scaffold(
-      backgroundColor: ColorExtension.white,
-      body: SingleChildScrollView(
-        child: SafeArea(
+        backgroundColor: ColorExtension.white,
+        body: SingleChildScrollView(
+            child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header Row
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Welcome back",
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: ColorExtension.gray,
-                          ),
-                        ),
-                        Text(
-                          "Asmare Admasu",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: ColorExtension.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        "assets/images/notification_active.png",
-                        width: 25,
-                        height: 25,
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: media.width * 0.05),
-
-                // Gradient Container
-                Container(
-                  height: media.width * 0.4,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: ColorExtension.primaryG,
-                    ),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Row(
+                    // Header Row
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "BMI(Body Mass Index)",
+                              "Welcome back",
                               style: TextStyle(
-                                fontSize: 15,
-                                color: ColorExtension.white,
-                                fontWeight: FontWeight.w700,
+                                fontSize: 10,
+                                color: ColorExtension.gray,
                               ),
                             ),
                             Text(
-                              "You have a normal weight",
+                              "Asmare Admasu",
                               style: TextStyle(
-                                fontSize: 12,
-                                color: ColorExtension.white,
-                              ),
-                            ),
-                            SizedBox(height: media.width * 0.05),
-                            SizedBox(
-                              width: 100,
-                              height: 30,
-                              child: RoundButton(
-                                title: "View More",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                type: RoundButtonType.bgSGradient,
-                                onPressed: () {},
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: ColorExtension.black,
                               ),
                             ),
                           ],
                         ),
-                            AspectRatio(
-                            aspectRatio: 1,
-                            child: PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {},
-                                ),
-                                startDegreeOffset: 250,
-                                borderData: FlBorderData(
-                                  show: false,
-                                ),
-                                sectionsSpace: 1,
-                                centerSpaceRadius: 0,
-                                sections: showingSections(),
-                              ),
-                            ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image.asset(
+                            "assets/images/notification_active.png",
+                            width: 25,
+                            height: 25,
+                            fit: BoxFit.fitHeight,
                           ),
+                        ),
                       ],
                     ),
-                  ),
-                ),
-              SizedBox(height: media.width * 0.05),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: ColorExtension.primaryColor2.withOpacity(0.3),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                          "Today Target",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: ColorExtension.black,
-                          ),
+                    SizedBox(height: media.width * 0.05),
+
+                    // Gradient Container
+                    Container(
+                      height: media.width * 0.4,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: ColorExtension.primaryG,
                         ),
-                          SizedBox(
-                              width: 90,
-                              height: 30,
-                              child: RoundButton(
-                                title: "Check",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                type: RoundButtonType.bgGradient,
-                                onPressed: () {},
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "BMI(Body Mass Index)",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: ColorExtension.white,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                Text(
+                                  "You have a normal weight",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ColorExtension.white,
+                                  ),
+                                ),
+                                SizedBox(height: media.width * 0.05),
+                                SizedBox(
+                                  width: 100,
+                                  height: 30,
+                                  child: RoundButton(
+                                    title: "View More",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    type: RoundButtonType.bgSGradient,
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ],
+                            ),
+                            AspectRatio(
+                              aspectRatio: 1,
+                              child: PieChart(
+                                PieChartData(
+                                  pieTouchData: PieTouchData(
+                                    touchCallback: (FlTouchEvent event,
+                                        pieTouchResponse) {},
+                                  ),
+                                  startDegreeOffset: 250,
+                                  borderData: FlBorderData(
+                                    show: false,
+                                  ),
+                                  sectionsSpace: 1,
+                                  centerSpaceRadius: 0,
+                                  sections: showingSections(),
+                                ),
                               ),
                             ),
-                  ],
-                ),
-              ),
-                  SizedBox(height: media.width * 0.05),
-               Text(
-                          "Activity Status",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: ColorExtension.black,
-                          ),
+                          ],
                         ),
-                           SizedBox(height: media.width * 0.02),
-
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                    child: Container(
-                      height: media.width * 0.5,
-                      width: double.maxFinite,
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                      ),
+                    ),
+                    SizedBox(height: media.width * 0.05),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 15),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(15),
                         color: ColorExtension.primaryColor2.withOpacity(0.3),
                       ),
-                      child: Stack(
-                        alignment: Alignment.topLeft,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                                "Heart Rate",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: ColorExtension.black,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              ShaderMask(
-                                 shaderCallback: (bounds) {
-                      return LinearGradient(
-                              colors: ColorExtension.primaryG,
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight)
-                          .createShader(
-                              Rect.fromLTRB(0, 0, bounds.width, bounds.height));
-                           },
-                              child:Text(
-                                "78 BPM",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: ColorExtension.white.withOpacity(0.7),
-                                ),
-                              ),
-                              ),
-
-                        ],
-                          )
+                            "Today Target",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: ColorExtension.black,
+                            ),
                           ),
-                              LineChart(
-                            LineChartData(
-                              showingTooltipIndicators:
-                                  showingTooltipOnSpots.map((index) {
-                                return ShowingTooltipIndicators([
-                                  LineBarSpot(
-                                    tooltipsOnBar,
-                                    lineBarsData.indexOf(tooltipsOnBar),
-                                    tooltipsOnBar.spots[index],
-                                  ),
-                                ]);
-                              }).toList(),
-                              lineTouchData: LineTouchData(
-                                enabled: true,
-                                handleBuiltInTouches: false,
-                                touchCallback: (FlTouchEvent event,
-                                    LineTouchResponse? response) {
-                                  if (response == null ||
-                                      response.lineBarSpots == null) {
-                                    return;
-                                  }
-                                  if (event is FlTapUpEvent) {
-                                    final spotIndex =
-                                        response.lineBarSpots!.first.spotIndex;
-                                    showingTooltipOnSpots.clear();
-                                    setState(() {
-                                      showingTooltipOnSpots.add(spotIndex);
-                                    });
-                                  }
-                                },
-                                mouseCursorResolver: (FlTouchEvent event,
-                                    LineTouchResponse? response) {
-                                  if (response == null ||
-                                      response.lineBarSpots == null) {
-                                    return SystemMouseCursors.basic;
-                                  }
-                                  return SystemMouseCursors.click;
-                                },
-                                getTouchedSpotIndicator:
-                                    (LineChartBarData barData,
-                                        List<int> spotIndexes) {
-                                  return spotIndexes.map((index) {
-                                    return TouchedSpotIndicatorData(
-                                      const FlLine(
-                                        color: Colors.red,
+                          SizedBox(
+                            width: 90,
+                            height: 30,
+                            child: RoundButton(
+                              title: "Check",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              type: RoundButtonType.bgGradient,
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: media.width * 0.05),
+                    Text(
+                      "Activity Status",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: ColorExtension.black,
+                      ),
+                    ),
+                    SizedBox(height: media.width * 0.02),
+
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Container(
+                        height: media.width * 0.5,
+                        width: double.maxFinite,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorExtension.primaryColor2.withOpacity(0.3),
+                        ),
+                        child: Stack(
+                          alignment: Alignment.topLeft,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Heart Rate",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: ColorExtension.black,
+                                        fontWeight: FontWeight.w700,
                                       ),
-                                      FlDotData(
-                                        show: true,
-                                        getDotPainter:
-                                            (spot, percent, barData, index) =>
-                                                FlDotCirclePainter(
-                                          radius: 3,
-                                          color: Colors.white,
-                                          strokeWidth: 3,
-                                          strokeColor: ColorExtension.secondaryColor1,
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (bounds) {
+                                        return LinearGradient(
+                                                colors: ColorExtension.primaryG,
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight)
+                                            .createShader(Rect.fromLTRB(0, 0,
+                                                bounds.width, bounds.height));
+                                      },
+                                      child: Text(
+                                        "78 BPM",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: ColorExtension.white
+                                              .withOpacity(0.7),
                                         ),
                                       ),
-                                    );
-                                  }).toList();
-                                },
-                                touchTooltipData: LineTouchTooltipData(
-                                  // tooltipBgColor: ColorExtension.secondaryColor1,
-                                  tooltipRoundedRadius: 20,
-                                  getTooltipItems:
-                                      (List<LineBarSpot> lineBarsSpot) {
-                                    return lineBarsSpot.map((lineBarSpot) {
-                                      return LineTooltipItem(
-                                        "${lineBarSpot.x.toInt()} mins ago",
-                                        const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
+                                    ),
+                                  ],
+                                )),
+                            LineChart(
+                              LineChartData(
+                                showingTooltipIndicators:
+                                    showingTooltipOnSpots.map((index) {
+                                  return ShowingTooltipIndicators([
+                                    LineBarSpot(
+                                      tooltipsOnBar,
+                                      lineBarsData.indexOf(tooltipsOnBar),
+                                      tooltipsOnBar.spots[index],
+                                    ),
+                                  ]);
+                                }).toList(),
+                                lineTouchData: LineTouchData(
+                                  enabled: true,
+                                  handleBuiltInTouches: false,
+                                  touchCallback: (FlTouchEvent event,
+                                      LineTouchResponse? response) {
+                                    if (response == null ||
+                                        response.lineBarSpots == null) {
+                                      return;
+                                    }
+                                    if (event is FlTapUpEvent) {
+                                      final spotIndex = response
+                                          .lineBarSpots!.first.spotIndex;
+                                      showingTooltipOnSpots.clear();
+                                      setState(() {
+                                        showingTooltipOnSpots.add(spotIndex);
+                                      });
+                                    }
+                                  },
+                                  mouseCursorResolver: (FlTouchEvent event,
+                                      LineTouchResponse? response) {
+                                    if (response == null ||
+                                        response.lineBarSpots == null) {
+                                      return SystemMouseCursors.basic;
+                                    }
+                                    return SystemMouseCursors.click;
+                                  },
+                                  getTouchedSpotIndicator:
+                                      (LineChartBarData barData,
+                                          List<int> spotIndexes) {
+                                    return spotIndexes.map((index) {
+                                      return TouchedSpotIndicatorData(
+                                        const FlLine(
+                                          color: Colors.red,
+                                        ),
+                                        FlDotData(
+                                          show: true,
+                                          getDotPainter:
+                                              (spot, percent, barData, index) =>
+                                                  FlDotCirclePainter(
+                                            radius: 3,
+                                            color: Colors.white,
+                                            strokeWidth: 3,
+                                            strokeColor:
+                                                ColorExtension.secondaryColor1,
+                                          ),
                                         ),
                                       );
                                     }).toList();
                                   },
+                                  touchTooltipData: LineTouchTooltipData(
+                                    // tooltipBgColor: ColorExtension.secondaryColor1,
+                                    tooltipRoundedRadius: 20,
+                                    getTooltipItems:
+                                        (List<LineBarSpot> lineBarsSpot) {
+                                      return lineBarsSpot.map((lineBarSpot) {
+                                        return LineTooltipItem(
+                                          "${lineBarSpot.x.toInt()} mins ago",
+                                          const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      }).toList();
+                                    },
+                                  ),
+                                ),
+                                lineBarsData: lineBarsData,
+                                minY: 0,
+                                maxY: 130,
+                                titlesData: const FlTitlesData(
+                                  show: false,
+                                ),
+                                gridData: const FlGridData(show: false),
+                                borderData: FlBorderData(
+                                  show: true,
+                                  border: Border.all(
+                                    color: Colors.transparent,
+                                  ),
                                 ),
                               ),
-                              lineBarsData: lineBarsData,
-                              minY: 0,
-                              maxY: 130,
-                              titlesData: const FlTitlesData(
-                                show: false,
-                              ),
-                              gridData: const FlGridData(show: false),
-                              borderData: FlBorderData(
-                                show: true,
-                                border: Border.all(
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                    
-                      ),
-                  ),
-                     
-                     SizedBox(height: media.width * 0.05),
-                     Row(
+                    ),
+
+                    SizedBox(height: media.width * 0.05),
+                    Row(
                       children: [
                         Expanded(
                           child: Container(
-                            height: media.width * 0.95 ,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            height: media.width * 0.95,
                             decoration: BoxDecoration(
-                              color: ColorExtension.white,
-                              borderRadius: BorderRadius.circular(25),
-                              boxShadow: const[
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 2,
-                              )
-                              ]
-                            ),
+                                color: ColorExtension.white,
+                                borderRadius: BorderRadius.circular(25),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 2,
+                                  )
+                                ]),
                             child: Row(
                               children: [
-                                 SimpleAnimationProgressBar(
-                              height: media.width * 0.85,
-                              width: media.width * 0.07,
-                              backgroundColor: Colors.grey.shade100,
-                              foregrondColor: Colors.purple,
-                              ratio: 0.5,
-                              direction: Axis.vertical,
-                              curve: Curves.fastLinearToSlowEaseIn,
-                              duration: const Duration(seconds: 3),
-                              borderRadius: BorderRadius.circular(15) ,
-                              gradientColor: LinearGradient(
-                                  colors: ColorExtension.primaryG,
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter),
-                            ),
+                                SimpleAnimationProgressBar(
+                                  height: media.width * 0.85,
+                                  width: media.width * 0.07,
+                                  backgroundColor: Colors.grey.shade100,
+                                  foregrondColor: Colors.purple,
+                                  ratio: 0.5,
+                                  direction: Axis.vertical,
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                  duration: const Duration(seconds: 3),
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradientColor: LinearGradient(
+                                      colors: ColorExtension.primaryG,
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Water Intake",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: ColorExtension.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.02,
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (bounds) {
+                                        return LinearGradient(
+                                                colors: ColorExtension.primaryG,
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight)
+                                            .createShader(Rect.fromLTRB(0, 0,
+                                                bounds.width, bounds.height));
+                                      },
+                                      child: Text(
+                                        "4 Liters",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: ColorExtension.white
+                                              .withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.03,
+                                    ),
+                                    Text(
+                                      "Real time updates",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: ColorExtension.gray,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.03,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: waterArr.map((wObj) {
+                                        var isLast = wObj == waterArr.last;
+                                        return Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                    color: ColorExtension
+                                                        .secondaryColor2,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                ),
+                                                if (!isLast)
+                                                  DottedDashedLine(
+                                                    height: media.width * 0.1,
+                                                    width: 0,
+                                                    axis: Axis.vertical,
+                                                    dashColor: ColorExtension
+                                                        .secondaryColor2
+                                                        .withOpacity(0.4),
+                                                  )
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: media.width * 0.03,
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  wObj["title"].toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: ColorExtension.gray,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                ShaderMask(
+                                                  shaderCallback: (bounds) {
+                                                    return LinearGradient(
+                                                            colors:
+                                                                ColorExtension
+                                                                    .secondaryG,
+                                                            begin: Alignment
+                                                                .centerLeft,
+                                                            end: Alignment
+                                                                .centerRight)
+                                                        .createShader(
+                                                            Rect.fromLTRB(
+                                                                0,
+                                                                0,
+                                                                bounds.width,
+                                                                bounds.height));
+                                                  },
+                                                  child: Text(
+                                                    wObj["subtitle"].toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: ColorExtension
+                                                          .white
+                                                          .withOpacity(0.7),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: media.width * 0.03,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      }).toList(),
+                                    )
+                                  ],
+                                ))
                               ],
                             ),
                           ),
                         ),
                         SizedBox(width: media.width * 0.05),
                         Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                                width: double.maxFinite,
                                 height: media.width * 0.45,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 20),
                                 decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        blurRadius: 2,
+                                      )
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Sleep",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: ColorExtension.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.015,
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (bounds) {
+                                        return LinearGradient(
+                                                colors: ColorExtension.primaryG,
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight)
+                                            .createShader(Rect.fromLTRB(0, 0,
+                                                bounds.width, bounds.height));
+                                      },
+                                      child: Text(
+                                        "8h 20m",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: ColorExtension.white
+                                              .withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ),
+                                     const Spacer(),
+                                    Image.asset(
+                                      "assets/images/sleep_grap.png",
+                                      width: double.maxFinite,
+                                      fit: BoxFit.fitWidth,
+                                    )
+                                  ],
+                                )),
+                            SizedBox(height: media.width * 0.05),
+                            Container(
+                              width: double.maxFinite,
+                              height: media.width * 0.45,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
+                              decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
                                   color: Colors.white,
                                   boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 2,
-                                  )
-                                  ]
-                                ),
-                              ),
-                                 SizedBox(height: media.width * 0.05),
-                              Container(
-                                height: media.width * 0.45,
-                                decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.circular(25),
-                                  color: Colors.white,
-                                  boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 2,
-                                  )
-                                  ]
-                                ),
-                              ),
-                            ],
-                          ))
+                                    BoxShadow(
+                                      color: Colors.black12,
+                                      blurRadius: 2,
+                                    )
+                                  ]),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Calories",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: ColorExtension.black,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: media.width * 0.015,
+                                    ),
+                                    ShaderMask(
+                                      shaderCallback: (bounds) {
+                                        return LinearGradient(
+                                                colors: ColorExtension.primaryG,
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight)
+                                            .createShader(Rect.fromLTRB(0, 0,
+                                                bounds.width, bounds.height));
+                                      },
+                                      child: Text(
+                                        "760 kcal",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: ColorExtension.white
+                                              .withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      child: SizedBox(
+                                        width: media.width*0.2,
+                                        height: media.width*0.2,
+                                        child: Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Container( 
+                                              width: media.width*0.15,
+                                              height: media.width*0.15,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: ColorExtension.primaryG,
+                                                  ),
+                                                  borderRadius: BorderRadius.circular(media.width*0.75) ,
+                                                
+                                              ),
+                                                child: FittedBox(
+                                                  child: Text(
+                                                      "230kcal\n left",
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: ColorExtension.white,
+                                                        fontSize: 10,
+                                                      )
+                                                    ),
+                                                )
+                                            ),
+                                           SimpleCircularProgressBar(
+                                            startAngle:-180,
+                                            progressStrokeWidth: 15,
+                                            progressColors: ColorExtension.primaryG,
+                                            valueNotifier: ValueNotifier(50),
+                                            backColor: Colors.grey.shade200,
+                                            backStrokeWidth: 15,
+                                          ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ],
+                        ))
                       ],
-                     )
-                     ,     SizedBox(height: media.width * 0.05),
-                    ]
-                  )
-              
-            ),
-          )
-        )
-    );
+                    ),
+                    SizedBox(height: media.width * 0.05),
+                    
+                       SizedBox(height: media.width * 0.05),
+
+                  ])),
+        )));
   }
 
-    List<PieChartSectionData> showingSections() {
+  List<PieChartSectionData> showingSections() {
     return List.generate(
       2,
       (i) {
@@ -503,5 +789,4 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
 }

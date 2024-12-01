@@ -1,6 +1,6 @@
 
 import 'package:fit_app/common/color_extension.dart';
-import 'package:fit_app/screen/auth/register_screen.dart';
+import 'package:fit_app/screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       primaryColor: ColorExtension.primaryColor1,
       fontFamily: "Poppins"
       ),
-      home: const RegisterScreen(),
+      home: const HomeScreen(),
     );
   }
 }
