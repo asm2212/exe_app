@@ -1,6 +1,7 @@
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/common_widgets/workout_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
@@ -14,6 +15,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+   List latestWorkoutArr = [
+    {
+      "name": "Full Body Workout",
+      "image": "assets/images/Workout1.png",
+      "kcal": "180",
+      "time": "20",
+      "progress": 0.3
+    },
+    {
+      "name": "Lower Body Workout",
+      "image": "assets/images/Workout2.png",
+      "kcal": "200",
+      "time": "30",
+      "progress": 0.4
+    },
+    {
+      "name": "Ab Workout",
+      "image": "assets/images/Workout3.png",
+      "kcal": "300",
+      "time": "40",
+      "progress": 0.7
+    },
+  ];
+
   List<int> showingTooltipOnSpots = [21];
 
   List<FlSpot> get allSpots => const [
@@ -914,12 +940,41 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         )),
-
-                    SizedBox(height: media.width * 0.05),
+                    SizedBox(height: media.width * 0.04),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Latest Workout",
+                          style: TextStyle(
+                              color: ColorExtension.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "See more",
+                            style: TextStyle(
+                                color: ColorExtension.gray,
+                                 fontSize: 14),
+                          ),
+                        ),
+                      ],
+                    ),
+                  
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: latestWorkoutArr.length,
+                      itemBuilder: (context,index){
+                       var wObj = latestWorkoutArr[index] as Map? ?? {};
+                       return WorkoutRow(wObj: wObj);
+                    })
                   ])),
-        )
-        )
-        );
+        )));
   }
 
   List<PieChartSectionData> showingSections() {
@@ -1000,7 +1055,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ]),
         barWidth: 2,
         isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(
           show: false,
         ),
