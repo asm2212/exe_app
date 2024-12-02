@@ -982,9 +982,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context,index){
                        var wObj = latestWorkoutArr[index] as Map? ?? {};
                        return WorkoutRow(wObj: wObj);
-                    })
-                  ])),
-        )));
+                    },
+                    ),
+                  ],
+                  ),
+                  ),
+        ),
+        ),
+        );
   }
 
   List<PieChartSectionData> showingSections() {

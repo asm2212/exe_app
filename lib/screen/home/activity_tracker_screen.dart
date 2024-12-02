@@ -1,4 +1,5 @@
 import 'package:fit_app/common/color_extension.dart';
+import 'package:fit_app/common_widgets/latest_activity_row.dart';
 import 'package:fit_app/common_widgets/today_target_cell.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,21 @@ class ActivityTrackerScreen extends StatefulWidget {
 }
 
 class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
+
+
+    List latestArr = [
+    {
+      "image": "assets/images/pic_4.png",
+      "title": "Drinking 300ml Water",
+      "time": "About 1 minutes ago"
+    },
+    {
+      "image": "assets/images/pic_5.png",
+      "title": "Eat Snack (Fitbar)",
+      "time": "About 3 hours ago"
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -124,7 +140,7 @@ class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: media.width*0.03,),
+                   SizedBox(height: media.width*0.03,),
                      Row(
                            children: [
                           const Expanded(
@@ -146,6 +162,39 @@ class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
                 ),
                 
               ),
+                 Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Latest Activity",
+                          style: TextStyle(
+                              color: ColorExtension.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        TextButton(
+                          onPressed: () {},   
+                          child: Text(
+                            "See more",
+                            style: TextStyle(
+                                color: ColorExtension.gray,
+                                 fontSize: 14),
+                          ),
+                        ),
+                      ],
+                    ),
+                  
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: latestArr.length,
+                      itemBuilder: (context,index){
+                       var lObj = latestArr[index] as Map? ?? {};
+                       return LatestActivityRow(lObj: lObj);
+                    },
+                    ),
             ],
           ),
         ),
