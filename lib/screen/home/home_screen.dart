@@ -2,6 +2,7 @@ import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/workout_row.dart';
+import 'package:fit_app/screen/home/activity_tracker_screen.dart';
 import 'package:fit_app/screen/home/notification_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -274,7 +275,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                               type: RoundButtonType.bgGradient,
-                              onPressed: () {},
+                              onPressed: () {
+                                 Navigator.push(context, 
+                            MaterialPageRoute(
+                              builder: (context) => const ActivityTrackerScreen()));
+                              },
                             ),
                           ),
                         ],
