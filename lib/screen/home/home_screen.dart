@@ -2,6 +2,7 @@ import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/workout_row.dart';
+import 'package:fit_app/screen/home/notification_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
@@ -159,7 +160,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, 
+                            MaterialPageRoute(
+                              builder: (context) => const NotificationScreen()));
+                          },
                           icon: Image.asset(
                             "assets/images/notification_active.png",
                             width: 25,
@@ -953,7 +958,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textAlign: TextAlign.center,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {},   
                           child: Text(
                             "See more",
                             style: TextStyle(
