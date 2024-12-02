@@ -1,6 +1,7 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/latest_activity_row.dart';
 import 'package:fit_app/common_widgets/today_target_cell.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class ActivityTrackerScreen extends StatefulWidget {
@@ -11,9 +12,7 @@ class ActivityTrackerScreen extends StatefulWidget {
 }
 
 class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
-
-
-    List latestArr = [
+  List latestArr = [
     {
       "image": "assets/images/pic_4.png",
       "title": "Drinking 300ml Water",
@@ -111,94 +110,351 @@ class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
                           ),
                         ),
                         SizedBox(
-                          width: 45,
-                          height: 45,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: ColorExtension.primaryG
+                            width: 45,
+                            height: 45,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: ColorExtension.primaryG),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {},
+                                padding: EdgeInsets.zero,
+                                height: 35,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
                                 ),
-                                borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: MaterialButton(
-                              onPressed: (){},
-                              padding: EdgeInsets.zero,
-                              height:35,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                                textColor: ColorExtension.primaryColor1,
+                                minWidth: double.maxFinite,
+                                elevation: 0,
+                                color: Colors.transparent,
+                                child: Icon(
+                                  Icons.add,
+                                  color: ColorExtension.white,
+                                  size: 30,
+                                ),
                               ),
-                              textColor: ColorExtension.primaryColor1,
-                              minWidth: double.maxFinite,
-                              elevation:0,
-                              color: Colors.transparent,
-                              child: Icon(
-                                Icons.add,
-                                color: ColorExtension.white,
-                                size: 30,),
-                              ),
-                          )
-                        ),
+                            )),
                       ],
                     ),
-                   SizedBox(height: media.width*0.03,),
-                     Row(
-                           children: [
-                          const Expanded(
+                    SizedBox(
+                      height: media.width * 0.03,
+                    ),
+                    Row(
+                      children: [
+                        const Expanded(
                             child: TodayTargetCell(
-                              icon: "assets/images/water.png", 
-                              value: "8 L", 
-                              title: "Water Intake")
-                              ),
-                                  SizedBox(width: media.width*0.04,),
-                             const  Expanded(
+                                icon: "assets/images/water.png",
+                                value: "8 L",
+                                title: "Water Intake")),
+                        SizedBox(
+                          width: media.width * 0.04,
+                        ),
+                        const Expanded(
                             child: TodayTargetCell(
-                              icon: "assets/images/foot.png", 
-                              value: "2400", 
-                              title: "Foot Steps")
-                              ),
-                           ],
+                                icon: "assets/images/foot.png",
+                                value: "2400",
+                                title: "Foot Steps")),
+                      ],
                     )
                   ],
                 ),
-                
               ),
-                 Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Latest Activity",
-                          style: TextStyle(
-                              color: ColorExtension.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        TextButton(
-                          onPressed: () {},   
-                          child: Text(
-                            "See more",
+              SizedBox(
+                height: media.width * 0.1,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Activity  Progress",
+                    style: TextStyle(
+                        color: ColorExtension.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Container(
+                      height: 40,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        gradient:
+                            LinearGradient(colors: ColorExtension.primaryG),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                          items: ["Weekly", "Monthly"]
+                              .map((name) => DropdownMenuItem(
+                                    value: name,
+                                    child: Text(
+                                      name,
+                                      style: TextStyle(
+                                          color: ColorExtension.gray,
+                                          fontSize: 14),
+                                    ),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {},
+                          icon: Icon(Icons.expand_more,
+                              color: ColorExtension.white),
+                          hint: Text(
+                            "Weekly",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: ColorExtension.gray,
-                                 fontSize: 14),
+                                color: ColorExtension.white, fontSize: 14),
                           ),
                         ),
-                      ],
+                      )),
+                ],
+              ),
+              SizedBox(
+                height: media.width * 0.05,
+              ),
+              Container(
+                height: media.width * 0.6,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                decoration: BoxDecoration(
+                    color: ColorExtension.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(color: Colors.black12, blurRadius: 3)
+                    ]),
+                child: BarChart(BarChartData(
+                  barTouchData: BarTouchData(
+                    touchTooltipData: BarTouchTooltipData(
+                      getTooltipColor: ((group) {
+                        return Colors.grey;
+                      }),
+                      tooltipHorizontalAlignment: FLHorizontalAlignment.right,
+                      tooltipMargin: 10,
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                        String weekDay;
+                        switch (group.x) {
+                          case 0:
+                            weekDay = 'Monday';
+                            break;
+                          case 1:
+                            weekDay = 'Tuesday';
+                            break;
+                          case 2:
+                            weekDay = 'Wednesday';
+                            break;
+                          case 3:
+                            weekDay = 'Thursday';
+                            break;
+                          case 4:
+                            weekDay = 'Friday';
+                            break;
+                          case 5:
+                            weekDay = 'Saturday';
+                            break;
+                          case 6:
+                            weekDay = 'Sunday';
+                            break;
+                          default:
+                            throw Error();
+                        }
+                        return BarTooltipItem(
+                          '$weekDay\n',
+                          const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: (rod.toY - 1).toString(),
+                              style: TextStyle(
+                                color: ColorExtension.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
-                  
-                    ListView.builder(
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: latestArr.length,
-                      itemBuilder: (context,index){
-                       var lObj = latestArr[index] as Map? ?? {};
-                       return LatestActivityRow(lObj: lObj);
+                    touchCallback: (FlTouchEvent event, barTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            barTouchResponse == null ||
+                            barTouchResponse.spot == null) {
+                          // touchedIndex = -1;
+                          return;
+                        }
+                        // touchedIndex =
+                        //     barTouchResponse.spot!.touchedBarGroupIndex;
+                      });
                     },
+                  ),
+                  titlesData: FlTitlesData(
+                    show: true,
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
                     ),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        getTitlesWidget: getTitles,
+                        reservedSize: 38,
+                      ),
+                    ),
+                    leftTitles: const AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: false,
+                      ),
+                    ),
+                  ),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  barGroups: showingGroups(),
+                  gridData: const FlGridData(show: false),
+                )),
+              ),
+              SizedBox(
+                height: media.width * 0.05,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Latest Activity",
+                    style: TextStyle(
+                        color: ColorExtension.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See more",
+                      style:
+                          TextStyle(color: ColorExtension.gray, fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: latestArr.length,
+                itemBuilder: (context, index) {
+                  var lObj = latestArr[index] as Map? ?? {};
+                  return LatestActivityRow(lObj: lObj);
+                },
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget getTitles(double value, TitleMeta meta) {
+    var style = TextStyle(
+      color: ColorExtension.gray,
+      fontWeight: FontWeight.w500,
+      fontSize: 12,
+    );
+    Widget text;
+    switch (value.toInt()) {
+      case 0:
+        text = Text('Sun', style: style);
+        break;
+      case 1:
+        text = Text('Mon', style: style);
+        break;
+      case 2:
+        text = Text('Tue', style: style);
+        break;
+      case 3:
+        text = Text('Wed', style: style);
+        break;
+      case 4:
+        text = Text('Thu', style: style);
+        break;
+      case 5:
+        text = Text('Fri', style: style);
+        break;
+      case 6:
+        text = Text('Sat', style: style);
+        break;
+      default:
+        text = Text('', style: style);
+        break;
+    }
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 16,
+      child: text,
+    );
+  }
+
+  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
+        switch (i) {
+          case 0:
+            return makeGroupData(0, 5, ColorExtension.primaryG,
+               );
+          case 1:
+            return makeGroupData(1, 10.5, ColorExtension.secondaryG,
+                );
+          case 2:
+            return makeGroupData(2, 5, ColorExtension.primaryG,
+                );
+          case 3:
+            return makeGroupData(3, 7.5, ColorExtension.secondaryG,
+                );
+          case 4:
+            return makeGroupData(4, 15, ColorExtension.primaryG,
+              );
+          case 5:
+            return makeGroupData(5, 5.5, ColorExtension.secondaryG,
+               );
+          case 6:
+            return makeGroupData(6, 8.5, ColorExtension.primaryG,
+             );
+          default:
+            return throw Error();
+        }
+      });
+
+  BarChartGroupData makeGroupData(
+    int x,
+    double y,
+    List<Color> barColor, {
+    bool isTouched = false,
+    double width = 22,
+    List<int> showTooltips = const [],
+  }) {
+    return BarChartGroupData(
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: isTouched ? y + 1 : y,
+          gradient: LinearGradient(
+              colors: barColor,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
+          width: width,
+          borderSide: isTouched
+              ? const BorderSide(color: Colors.green)
+              : const BorderSide(color: Colors.white, width: 0),
+          backDrawRodData: BackgroundBarChartRodData(
+            show: true,
+            toY: 20,
+            color: ColorExtension.lightGray,
+          ),
+        ),
+      ],
+      showingTooltipIndicators: showTooltips,
     );
   }
 }
