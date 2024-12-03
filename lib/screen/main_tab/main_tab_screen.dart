@@ -2,6 +2,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/tab_button.dart';
 import 'package:fit_app/screen/home/blank_screen.dart';
 import 'package:fit_app/screen/home/home_screen.dart';
+import 'package:fit_app/screen/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -113,7 +114,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/profile_tab_select.png",
                   onTap: () {
                     selectTab = 3;
-                    currentTab = const BlankScreen();
+                    currentTab = const ProfileScreen();
                     if (mounted) {
                       setState(() {});
                     }
@@ -123,7 +124,9 @@ class _MainTabScreenState extends State<MainTabScreen> {
               ),
             ],
           ),
+      
         ),
+        
       ),
     );
   }

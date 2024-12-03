@@ -984,6 +984,7 @@ class _HomeScreenState extends State<HomeScreen> {
                        return WorkoutRow(wObj: wObj);
                     },
                     ),
+                    const SizedBox(height: 50),
                   ],
                   ),
                   ),
