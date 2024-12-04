@@ -28,18 +28,18 @@ class TitleSubtitleCell extends StatelessWidget {
                       Rect.fromLTRB(0, 0, bounds.width, bounds.height));
             },
             child: Text(
-              title,
+             subtitle,
               style: TextStyle(
                   color: ColorExtension.white.withOpacity(0.7),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 19),
             ),
           ),
           Text(
-            subtitle,
+            title,
             style: TextStyle(
               color:ColorExtension.gray,
-              fontSize: 12,
+              fontSize: 15,
             ),
           ),
         ],

@@ -1,5 +1,7 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/common_widgets/setting_row.dart';
+import 'package:fit_app/common_widgets/title_subtitle_cell.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -10,6 +12,44 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  
+  List accountArr = [
+    {
+      "image": "assets/images/p_personal.png",
+       "name": "Personal Data",
+        "tag": "1"},
+    {
+      "image": "assets/images/p_achi.png",
+       "name": "Achievement", 
+       "tag": "2"},
+    {
+      "image": "assets/images/p_activity.png",
+      "name": "Activity History",
+      "tag": "3"
+    },
+    {
+      "image": "assets/images/p_workout.png",
+      "name": "Workout Progress",
+      "tag": "4"
+    }
+  ];
+
+    List otherArr = [
+    {
+      "image": "assets/images/p_contact.png",
+     "name": "Contact Us",
+      "tag": "5"},
+    {
+      "image": "assets/images/p_privacy.png",
+       "name": "Privacy Policy", 
+       "tag": "6"},
+    {
+      "image": "assets/images/p_setting.png",
+       "name": "Setting", 
+       "tag": "7"},
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +79,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fit: BoxFit.contain,
                   height: 12,
                   width: 12,
-                )),
+                ),
+                ),
           ),
         ],
       ),
@@ -98,52 +139,95 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
+            const  Row(
                 children: [
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                           decoration: BoxDecoration(
-                          color: ColorExtension.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 2,
-                            ),
-                          ]),
-                      child: Column(
-                        children: [
-                          ShaderMask(
-                            shaderCallback: (bounds) {
-                              return LinearGradient(
-                                      colors: ColorExtension.primaryG,
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight)
-                                  .createShader(Rect.fromLTRB(
-                                      0, 0, bounds.width, bounds.height));
-                            },
-                            child: Text(
-                              "180cm",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: ColorExtension.white.withOpacity(0.8),
-                              ),
-                            ),
-                          ),
-                          Text(
-                            "Height",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: ColorExtension.gray,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      ),
+                Expanded(
+                  child: TitleSubtitleCell(
+                    title: "Height", 
+                    subtitle: "180cm"),
+                    ),
+                             SizedBox(width: 20),
+                    Expanded(
+                  child: TitleSubtitleCell(
+                    title: "Weight", 
+                    subtitle: "65kg"),
+                    ),
+                             SizedBox(width: 20),
+                    Expanded(
+                  child: TitleSubtitleCell(
+                    title: "22yo", 
+                    subtitle: "Age"),
+                    ),
                 ],
               ),
+                   const SizedBox(height: 20),
+                   Container(
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: ColorExtension.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                           Text(
+                          'Account',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: ColorExtension.black),
+                        ),
+                          const SizedBox(height: 10),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: accountArr.length,
+                            itemBuilder: (context, index) {
+                              var iObj = accountArr[index]as Map? ?? {};
+                              return SettingRow(
+                                 icon: iObj["image"].toString(),
+                                 title:  iObj["name"].toString(),
+                                  onPressed: (){}); 
+                            }
+                          )
+                      ],
+                    ),
+                   ),
+                   const SizedBox(height: 20),
+                   Container(
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: ColorExtension.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                           Text(
+                          'Other',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: ColorExtension.black),
+                        ),
+                          const SizedBox(height: 10),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: otherArr.length,
+                            itemBuilder: (context, index) {
+                              var iObj = otherArr[index]as Map? ?? {};
+                              return SettingRow(
+                                 icon: iObj["image"].toString(),
+                                 title:  iObj["name"].toString(),
+                                  onPressed: (){}); 
+                            }
+                          )
+                      ],
+                    ),
+                   )
             ],
           ),
         ),
