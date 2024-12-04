@@ -12,7 +12,7 @@ class RoundButton extends StatelessWidget {
   const RoundButton(
       {super.key,
       required this.title,
-      this.fontSize = 16,
+      this.fontSize = 18,
       this.fontWeight = FontWeight.w700,
       this.type = RoundButtonType.bgGradient,
       required this.onPressed});
@@ -35,7 +35,7 @@ class RoundButton extends StatelessWidget {
                 : null),
         child: MaterialButton(
           onPressed: onPressed,
-          height: 50,
+          height: 55,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           textColor: ColorExtension.primaryColor1,

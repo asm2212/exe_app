@@ -3,6 +3,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/workout_row.dart';
 import 'package:fit_app/screen/home/activity_tracker_screen.dart';
+import 'package:fit_app/screen/home/finished_workout_screen.dart';
 import 'package:fit_app/screen/home/notification_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -981,9 +982,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: latestWorkoutArr.length,
                       itemBuilder: (context,index){
                        var wObj = latestWorkoutArr[index] as Map? ?? {};
-                       return WorkoutRow(wObj: wObj);
-                    },
-                    ),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FinishedWorkoutScreen(),
+                              ),
+                            );
+                          },
+                          child: WorkoutRow(wObj: wObj));
+                    }),
+                    
                     const SizedBox(height: 50),
                   ],
                   ),
