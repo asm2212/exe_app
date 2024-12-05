@@ -9,13 +9,14 @@ class RoundButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double fontSize;
   final FontWeight fontWeight;
+  final double elevation;
   const RoundButton(
       {super.key,
       required this.title,
       this.fontSize = 18,
       this.fontWeight = FontWeight.w700,
       this.type = RoundButtonType.bgGradient,
-      required this.onPressed});
+      required this.onPressed, this.elevation = 1});
 
   @override
   Widget build(BuildContext context) {

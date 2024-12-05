@@ -3,6 +3,7 @@ import 'package:fit_app/common_widgets/tab_button.dart';
 import 'package:fit_app/screen/home/blank_screen.dart';
 import 'package:fit_app/screen/home/home_screen.dart';
 import 'package:fit_app/screen/profile/profile_screen.dart';
+import 'package:fit_app/screen/workout_tracker.dart/workout_tracker_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -85,7 +86,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/activity_tab_select.png",
                   onTap: () {
                     selectTab = 1;
-                    currentTab = const BlankScreen();
+                    currentTab = const WorkoutTrackerScreen();
                     if (mounted) {
                       setState(() {});
                     }
