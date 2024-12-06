@@ -3,6 +3,7 @@ import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/upcoming_workout.dart';
 import 'package:fit_app/common_widgets/what_train_row.dart';
 import 'package:fit_app/screen/home/activity_tracker_screen.dart';
+import 'package:fit_app/screen/workout_tracker.dart/workout_detail_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -318,7 +319,11 @@ class _WorkoutTrackerScreenState extends State<WorkoutTrackerScreen> {
                       itemCount: whatArr.length,
                       itemBuilder: (context, index) {
                         var wObj = whatArr[index] as Map? ?? {};
-                        return  WhatTrainRow(wObj: wObj) ;
+                        return  InkWell(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  WorkoutDetailScreen(dObj: wObj)));
+                          },
+                          child: WhatTrainRow(wObj: wObj)) ;
                       }),
                   SizedBox(
                     height: media.width * 0.13,

@@ -157,7 +157,7 @@ class _ActivityTrackerScreenState extends State<ActivityTrackerScreen> {
                                 value: "2400",
                                 title: "Foot Steps")),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

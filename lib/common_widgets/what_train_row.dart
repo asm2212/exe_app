@@ -2,7 +2,6 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:flutter/material.dart';
 
-
 class WhatTrainRow extends StatelessWidget {
   final Map wObj;
   const WhatTrainRow({super.key, required this.wObj});
