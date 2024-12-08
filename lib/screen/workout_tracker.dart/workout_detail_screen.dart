@@ -351,7 +351,8 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                                     ),
                                   ),
                                 );
-                              });
+                              }
+                              );
                         },
                       ),
                       SizedBox(

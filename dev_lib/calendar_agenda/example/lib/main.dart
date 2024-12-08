@@ -93,7 +93,7 @@ class _ExamplePageState extends State<ExamplePage> {
       ),
       body: Center(
         child: Column(
-          children: [
+          children:[
             ElevatedButton(
               onPressed: () {
                 _calendarAgendaControllerAppBar.goToDay(DateTime.now());
