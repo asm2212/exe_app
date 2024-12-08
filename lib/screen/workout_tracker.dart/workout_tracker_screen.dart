@@ -321,7 +321,10 @@ class _WorkoutTrackerScreenState extends State<WorkoutTrackerScreen> {
                         var wObj = whatArr[index] as Map? ?? {};
                         return  InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>  WorkoutDetailScreen(dObj: wObj)));
+                            Navigator.push(
+                              context,
+                               MaterialPageRoute(
+                                builder: (context) =>  WorkoutDetailScreen(dObj: wObj)));
                           },
                           child: WhatTrainRow(wObj: wObj)) ;
                       }),

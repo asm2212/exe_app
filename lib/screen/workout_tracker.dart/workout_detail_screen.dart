@@ -3,6 +3,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/exercises_set_section.dart';
 import 'package:fit_app/common_widgets/icon_title_next_row.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/screen/workout_tracker.dart/exercise_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutDetailScreen extends StatefulWidget {
@@ -316,7 +317,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Exercises ",
+                            "Exercises",
                             style: TextStyle(
                                 color: ColorExtension.black,
                                 fontSize: 20,
@@ -340,7 +341,17 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                         itemBuilder: (context, index) {
                           var sObj = exercisesArr[index] as Map? ?? {};
                           return ExercisesSetSection(
-                              sObj: sObj, onPressed: (obj) {});
+                              sObj: sObj,
+                              onPressed: (obj) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ExerciseDetailScreen(
+                                      eObj: obj,
+                                    ),
+                                  ),
+                                );
+                              });
                         },
                       ),
                       SizedBox(
