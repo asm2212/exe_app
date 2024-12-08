@@ -280,13 +280,13 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                         ),
                           const SizedBox(width: 5),
                         Text(
-                          " times",
+                          "  times",
                           style: TextStyle(
                             color: ColorExtension.gray,
                              fontSize: 18,
                              fontWeight: FontWeight.w600
                              ),
-                        )
+                        ),
                       ],
                     );
                   },
