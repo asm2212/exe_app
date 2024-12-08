@@ -11,13 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  calendar_agenda:
+    path: ../
 
   cupertino_icons: ^1.0.2
-  calendar_agenda: ^0.0.2+3
-  path: ^1.9.1
-  
-  
 
 dev_dependencies:
   flutter_test:
