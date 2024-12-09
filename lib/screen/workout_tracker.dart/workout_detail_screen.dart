@@ -4,6 +4,7 @@ import 'package:fit_app/common_widgets/exercises_set_section.dart';
 import 'package:fit_app/common_widgets/icon_title_next_row.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/screen/workout_tracker.dart/exercise_detail_screen.dart';
+import 'package:fit_app/screen/workout_tracker.dart/workout_schedule_screen.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutDetailScreen extends StatefulWidget {
@@ -229,7 +230,9 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen> {
                           title: "Schedule Workout",
                           time: "5/27, 09:00 AM",
                           color: ColorExtension.primaryColor2.withOpacity(0.3),
-                          onPressed: () {}),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const WorkoutScheduleScreen()));
+                          }),
                       SizedBox(
                         height: media.width * 0.04,
                       ),
