@@ -15,7 +15,7 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
 
     CalendarAgendaController _calendarAgendaControllerAppBar =
       CalendarAgendaController();
-      
+
   late DateTime _selectedDateAppBBar;
 
   List eventArr = [
@@ -236,7 +236,6 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                   var min = (sObj["date"] as DateTime).minute;
                                   //(0 to 2)
                                   var pos = (min / 60) * 2 - 1;
-
                                   return Align(
                                     alignment: Alignment(pos, 0),
                                     child: InkWell(
