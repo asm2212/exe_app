@@ -60,7 +60,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                   color: ColorExtension.lightGray,
                   borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
-                "assets/img/more_btn.png",
+                "assets/images/more_btn.png",
                 width: 15,
                 height: 15,
                 fit: BoxFit.contain,
@@ -76,7 +76,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
           Row(
             children: [
               Image.asset(
-                "assets/img/date.png",
+                "assets/images/date.png",
                 width: 20,
                 height: 20,
               ),
@@ -119,7 +119,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             height: 8,
           ),
           IconTitleNextRow(
-              icon: "assets/img/choose_workout.png",
+              icon: "assets/images/choose_workout.png",
               title: "Choose Workout",
               time: "Upperbody",
               color: ColorExtension.lightGray,
@@ -128,7 +128,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             height: 10,
           ),
           IconTitleNextRow(
-              icon: "assets/img/difficulity.png",
+              icon: "assets/images/difficulity.png",
               title: "Difficulity",
               time: "Beginner",
               color: ColorExtension.lightGray,
@@ -137,7 +137,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             height: 10,
           ),
           IconTitleNextRow(
-              icon: "assets/img/repetitions.png",
+              icon: "assets/images/repetitions.png",
               title: "Custom Repetitions",
               time: "",
               color: ColorExtension.lightGray,
@@ -146,7 +146,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             height: 10,
           ),
           IconTitleNextRow(
-              icon: "assets/img/repetitions.png",
+              icon: "assets/images/repetitions.png",
               title: "Custom Weights",
               time: "",
               color: ColorExtension.lightGray,
