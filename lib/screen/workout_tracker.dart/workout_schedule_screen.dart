@@ -1,6 +1,7 @@
 import 'package:calendar_agenda/calendar_agenda.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/screen/workout_tracker.dart/add_schedule_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart'; // Added import
@@ -457,7 +458,7 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
       ),
       floatingActionButton: InkWell(
         onTap: () {
-          // Define action for FAB here
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddScheduleScreen(   date: _selectedDateAppBBar,)));
         },
         child: Container(
           width: 55,
