@@ -73,12 +73,11 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
   }
 
   /// Parses a date string into a DateTime object based on the provided format
-  DateTime stringToDate(String dateString, {String formatStr = "dd/MM/yyyy hh:mm a"}) {
+  DateTime stringToDate(String dateString,
+      {String formatStr = "dd/MM/yyyy hh:mm a"}) {
     try {
       return DateFormat(formatStr).parse(dateString);
     } catch (e) {
-      // Handle parsing error
-      print("Error parsing date string: $e");
       return DateTime.now(); // Return current date as a fallback
     }
   }
@@ -92,14 +91,13 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
   }
 
   /// Formats a date string into another specified format
-  String getStringDateToOtherFormate(String dateString, {String outFormatStr = "h:mm a"}) {
+  String getStringDateToOtherFormate(String dateString,
+      {String outFormatStr = "h:mm a"}) {
     try {
       // Assuming the input format is "dd/MM/yyyy hh:mm a"
       DateTime date = DateFormat("dd/MM/yyyy hh:mm a").parse(dateString);
       return DateFormat(outFormatStr).format(date);
     } catch (e) {
-      // Handle formatting error
-      print("Error formatting date string: $e");
       return dateString; // Return original string as a fallback
     }
   }
@@ -111,8 +109,6 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
       DateTime date = DateFormat("dd/MM/yyyy hh:mm a").parse(dateString);
       return DateFormat('EEEE').format(date);
     } catch (e) {
-      // Handle parsing error
-      print("Error getting day title: $e");
       return ""; // Return empty string as a fallback
     }
   }
@@ -293,76 +289,93 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-                                              backgroundColor: Colors.transparent,
+                                              backgroundColor:
+                                                  Colors.transparent,
                                               contentPadding: EdgeInsets.zero,
                                               content: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                    vertical: 15, horizontal: 20),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 15,
+                                                        horizontal: 20),
                                                 decoration: BoxDecoration(
                                                   color: ColorExtension.white,
                                                   borderRadius:
                                                       BorderRadius.circular(20),
                                                 ),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.spaceBetween,
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Navigator.pop(context);
+                                                            Navigator.pop(
+                                                                context);
                                                           },
                                                           child: Container(
                                                             margin:
-                                                                const EdgeInsets.all(8),
+                                                                const EdgeInsets
+                                                                    .all(8),
                                                             height: 40,
                                                             width: 40,
-                                                            alignment: Alignment.center,
+                                                            alignment: Alignment
+                                                                .center,
                                                             decoration: BoxDecoration(
-                                                                color:
-                                                                    ColorExtension.lightGray,
+                                                                color: ColorExtension
+                                                                    .lightGray,
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(10)),
+                                                                        .circular(
+                                                                            10)),
                                                             child: Image.asset(
                                                               "assets/images/closed_btn.png",
                                                               width: 15,
                                                               height: 15,
-                                                              fit: BoxFit.contain,
+                                                              fit: BoxFit
+                                                                  .contain,
                                                             ),
                                                           ),
                                                         ),
                                                         Text(
                                                           "Workout Schedule",
                                                           style: TextStyle(
-                                                              color: ColorExtension.black,
+                                                              color:
+                                                                  ColorExtension
+                                                                      .black,
                                                               fontSize: 16,
                                                               fontWeight:
-                                                                  FontWeight.w700),
+                                                                  FontWeight
+                                                                      .w700),
                                                         ),
                                                         InkWell(
                                                           onTap: () {},
                                                           child: Container(
                                                             margin:
-                                                                const EdgeInsets.all(8),
+                                                                const EdgeInsets
+                                                                    .all(8),
                                                             height: 40,
                                                             width: 40,
-                                                            alignment: Alignment.center,
+                                                            alignment: Alignment
+                                                                .center,
                                                             decoration: BoxDecoration(
-                                                                color:
-                                                                    ColorExtension.lightGray,
+                                                                color: ColorExtension
+                                                                    .lightGray,
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(10)),
+                                                                        .circular(
+                                                                            10)),
                                                             child: Image.asset(
                                                               "assets/images/more_btn.png",
                                                               width: 15,
                                                               height: 15,
-                                                              fit: BoxFit.contain,
+                                                              fit: BoxFit
+                                                                  .contain,
                                                             ),
                                                           ),
                                                         )
@@ -374,7 +387,8 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                     Text(
                                                       sObj["name"].toString(),
                                                       style: TextStyle(
-                                                          color: ColorExtension.black,
+                                                          color: ColorExtension
+                                                              .black,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w700),
@@ -394,19 +408,18 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                       Text(
                                                         "${getDayTitle(sObj["start_time"].toString())}|${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm a")}",
                                                         style: TextStyle(
-                                                            color: ColorExtension.gray,
+                                                            color:
+                                                                ColorExtension
+                                                                    .gray,
                                                             fontSize: 12),
                                                       )
                                                     ]),
-                                            
-                                                     const SizedBox(
+                                                    const SizedBox(
                                                       height: 15,
                                                     ),
-                                            
                                                     RoundButton(
                                                         title: "Mark Done",
                                                         onPressed: () {}),
-                                            
                                                   ],
                                                 ),
                                               ),
@@ -422,14 +435,16 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                         alignment: Alignment.centerLeft,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                              colors: ColorExtension.secondaryG),
+                                              colors:
+                                                  ColorExtension.secondaryG),
                                           borderRadius:
                                               BorderRadius.circular(17.5),
                                         ),
                                         child: Text(
                                           "${sObj["name"].toString()}, ${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm a")}",
                                           maxLines: 1,
-                                          overflow: TextOverflow.ellipsis, // Added overflow
+                                          overflow: TextOverflow
+                                              .ellipsis, // Added overflow
                                           style: TextStyle(
                                             color: ColorExtension.white,
                                             fontSize: 12,
@@ -458,7 +473,12 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
       ),
       floatingActionButton: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddScheduleScreen(   date: _selectedDateAppBBar,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddScheduleScreen(
+                        date: _selectedDateAppBBar,
+                      )));
         },
         child: Container(
           width: 55,
