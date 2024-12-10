@@ -328,7 +328,7 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                                     BorderRadius
                                                                         .circular(10)),
                                                             child: Image.asset(
-                                                              "assets/img/closed_btn.png",
+                                                              "assets/images/closed_btn.png",
                                                               width: 15,
                                                               height: 15,
                                                               fit: BoxFit.contain,
