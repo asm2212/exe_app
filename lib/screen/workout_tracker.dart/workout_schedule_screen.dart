@@ -3,6 +3,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart'; // Added import
 
 class WorkoutScheduleScreen extends StatefulWidget {
   const WorkoutScheduleScreen({super.key});
@@ -12,8 +13,7 @@ class WorkoutScheduleScreen extends StatefulWidget {
 }
 
 class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
-
-    CalendarAgendaController _calendarAgendaControllerAppBar =
+  CalendarAgendaController _calendarAgendaControllerAppBar =
       CalendarAgendaController();
 
   late DateTime _selectedDateAppBBar;
@@ -59,12 +59,61 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
 
   List selectDayEventArr = [];
 
-  
   @override
   void initState() {
     super.initState();
     _selectedDateAppBBar = DateTime.now();
     setDayEventWorkoutList();
+  }
+
+  /// Converts a DateTime object to a start date (stripping the time component)
+  DateTime dateToStartDate(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
+  /// Parses a date string into a DateTime object based on the provided format
+  DateTime stringToDate(String dateString, {String formatStr = "dd/MM/yyyy hh:mm a"}) {
+    try {
+      return DateFormat(formatStr).parse(dateString);
+    } catch (e) {
+      // Handle parsing error
+      print("Error parsing date string: $e");
+      return DateTime.now(); // Return current date as a fallback
+    }
+  }
+
+  /// Formats minutes into a time string (e.g., 60 -> "1:00 AM")
+  String getTime(int minutes) {
+    final hour = minutes ~/ 60;
+    final minute = minutes % 60;
+    final date = DateTime(0, 1, 1, hour, minute);
+    return DateFormat('h:mm a').format(date);
+  }
+
+  /// Formats a date string into another specified format
+  String getStringDateToOtherFormate(String dateString, {String outFormatStr = "h:mm a"}) {
+    try {
+      // Assuming the input format is "dd/MM/yyyy hh:mm a"
+      DateTime date = DateFormat("dd/MM/yyyy hh:mm a").parse(dateString);
+      return DateFormat(outFormatStr).format(date);
+    } catch (e) {
+      // Handle formatting error
+      print("Error formatting date string: $e");
+      return dateString; // Return original string as a fallback
+    }
+  }
+
+  /// Retrieves the day of the week from a date string (e.g., "Monday")
+  String getDayTitle(String dateString) {
+    try {
+      // Assuming the input format is "dd/MM/yyyy hh:mm a"
+      DateTime date = DateFormat("dd/MM/yyyy hh:mm a").parse(dateString);
+      return DateFormat('EEEE').format(date);
+    } catch (e) {
+      // Handle parsing error
+      print("Error getting day title: $e");
+      return ""; // Return empty string as a fallback
+    }
   }
 
   void setDayEventWorkoutList() {
@@ -74,22 +123,20 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
         "name": wObj["name"],
         "start_time": wObj["start_time"],
         "date": stringToDate(wObj["start_time"].toString(),
-            formatStr: "dd/MM/yyyy hh:mm aa")
+            formatStr: "dd/MM/yyyy hh:mm a")
       };
     }).where((wObj) {
       return dateToStartDate(wObj["date"] as DateTime) == date;
     }).toList();
 
-    if( mounted  ) {
-      setState(() {
-        
-      });
+    if (mounted) {
+      setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-     var media = MediaQuery.of(context).size;
+    var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorExtension.white,
@@ -118,7 +165,9 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
         title: Text(
           "Workout Schedule",
           style: TextStyle(
-              color: ColorExtension.black, fontSize: 18, fontWeight: FontWeight.w700),
+              color: ColorExtension.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
@@ -141,8 +190,8 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
           )
         ],
       ),
-           backgroundColor: ColorExtension.white,
-             body: Column(
+      backgroundColor: ColorExtension.white,
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CalendarAgenda(
@@ -184,7 +233,6 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
             onDateSelected: (date) {
               _selectedDateAppBBar = date;
               setDayEventWorkoutList();
-              
             },
             selectedDayLogo: Container(
               width: double.maxFinite,
@@ -247,7 +295,8 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                               backgroundColor: Colors.transparent,
                                               contentPadding: EdgeInsets.zero,
                                               content: Container(
-                                                padding: const EdgeInsets.symmetric( vertical:15 , horizontal: 20 ),
+                                                padding: const EdgeInsets.symmetric(
+                                                    vertical: 15, horizontal: 20),
                                                 decoration: BoxDecoration(
                                                   color: ColorExtension.white,
                                                   borderRadius:
@@ -259,28 +308,25 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Navigator.pop(
-                                                                context);
+                                                            Navigator.pop(context);
                                                           },
                                                           child: Container(
                                                             margin:
-                                                                const EdgeInsets
-                                                                    .all(8),
+                                                                const EdgeInsets.all(8),
                                                             height: 40,
                                                             width: 40,
-                                                            alignment:
-                                                                Alignment.center,
+                                                            alignment: Alignment.center,
                                                             decoration: BoxDecoration(
-                                                                color: ColorExtension
-                                                                    .lightGray,
+                                                                color:
+                                                                    ColorExtension.lightGray,
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(
-                                                                            10)),
+                                                                        .circular(10)),
                                                             child: Image.asset(
                                                               "assets/img/closed_btn.png",
                                                               width: 15,
@@ -295,26 +341,22 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                               color: ColorExtension.black,
                                                               fontSize: 16,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                                  FontWeight.w700),
                                                         ),
                                                         InkWell(
                                                           onTap: () {},
                                                           child: Container(
                                                             margin:
-                                                                const EdgeInsets
-                                                                    .all(8),
+                                                                const EdgeInsets.all(8),
                                                             height: 40,
                                                             width: 40,
-                                                            alignment:
-                                                                Alignment.center,
+                                                            alignment: Alignment.center,
                                                             decoration: BoxDecoration(
-                                                                color: ColorExtension
-                                                                    .lightGray,
+                                                                color:
+                                                                    ColorExtension.lightGray,
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                        .circular(
-                                                                            10)),
+                                                                        .circular(10)),
                                                             child: Image.asset(
                                                               "assets/images/more_btn.png",
                                                               width: 15,
@@ -336,7 +378,7 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                           fontWeight:
                                                               FontWeight.w700),
                                                     ),
-                                                    const SizedBox(   
+                                                    const SizedBox(
                                                       height: 4,
                                                     ),
                                                     Row(children: [
@@ -349,7 +391,7 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                                         width: 8,
                                                       ),
                                                       Text(
-                                                        "${ getDayTitle(sObj["start_time"].toString()) }|${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm aa")}",
+                                                        "${getDayTitle(sObj["start_time"].toString())}|${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm a")}",
                                                         style: TextStyle(
                                                             color: ColorExtension.gray,
                                                             fontSize: 12),
@@ -384,8 +426,9 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
                                               BorderRadius.circular(17.5),
                                         ),
                                         child: Text(
-                                          "${sObj["name"].toString()}, ${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm aa")}",
+                                          "${sObj["name"].toString()}, ${getStringDateToOtherFormate(sObj["start_time"].toString(), outFormatStr: "h:mm a")}",
                                           maxLines: 1,
+                                          overflow: TextOverflow.ellipsis, // Added overflow
                                           style: TextStyle(
                                             color: ColorExtension.white,
                                             fontSize: 12,
@@ -414,8 +457,8 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
       ),
       floatingActionButton: InkWell(
         onTap: () {
+          // Define action for FAB here
         },
-     
         child: Container(
           width: 55,
           height: 55,
@@ -434,7 +477,6 @@ class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
           ),
         ),
       ),
-  
     );
   }
 }
