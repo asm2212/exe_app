@@ -142,7 +142,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
               height: 10,
             ),
             IconTitleNextRow(
-                icon: "assets/images/difficulity.png",
+                icon: "assets/images/difficulty.png",
                 title: "Difficulity",
                 time: "Beginner",
                 color: ColorExtension.lightGray,
