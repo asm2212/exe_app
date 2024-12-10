@@ -52,7 +52,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
           "Add Schedule",
           style: TextStyle(
               color: ColorExtension.black,
-              fontSize: 16,
+              fontSize: 19,
               fontWeight: FontWeight.w700),
         ),
         actions: [
@@ -95,7 +95,10 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
                 Text(
                   dateToString(widget.date, formatStr: "E, dd MMMM yyyy"),
                   style:
-                      TextStyle(color: ColorExtension.gray, fontSize: 14),
+                      TextStyle(
+                        color: ColorExtension.gray, 
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
                 ),
               ],
             ),
@@ -106,8 +109,8 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
               "Time",
               style: TextStyle(
                   color: ColorExtension.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+                  fontSize: 16, 
+                  fontWeight: FontWeight.w600),
             ),
             SizedBox(
               height: media.width * 0.35,
@@ -135,7 +138,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             IconTitleNextRow(
                 icon: "assets/images/choose_workout.png",
                 title: "Choose Workout",
-                time: "Upperbody",
+                time: "Underbody",
                 color: ColorExtension.lightGray,
                 onPressed: () {}),
             const SizedBox(
@@ -143,7 +146,7 @@ class _AddScheduleScreenState extends State<AddScheduleScreen> {
             ),
             IconTitleNextRow(
                 icon: "assets/images/difficulty.png",
-                title: "Difficulity",
+                title: "Difficulty",
                 time: "Beginner",
                 color: ColorExtension.lightGray,
                 onPressed: () {}),
