@@ -2,6 +2,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/find_eat_cell.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/today_meal_row.dart';
+import 'package:fit_app/screen/meal_planner/meal_food_details_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -386,7 +387,9 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                         itemBuilder: (context, index) {
                           var fObj = findEatArr[index] as Map? ?? {};
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MealFoodDetailsScreen(eObj: fObj) ) );
+                      },
                             child: FindEatCell(
                               fObj: fObj,
                               index: index,
