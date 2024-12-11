@@ -27,6 +27,11 @@ String dateToString(DateTime date, {String formatStr = "dd/MM/yyyy hh:mm a"}) {
   return format.format(date);
 }
 
+/*************  ✨ Codeium Command ⭐  *************/
+  /// Given a date string, returns the day title. If the date is today,
+  /// tomorrow, or yesterday, returns those strings. Otherwise, returns the
+  /// weekday name (e.g. "Monday").
+/******  b103df2f-6c7e-489e-aea1-7f9210928d3e  *******/
 String getDayTitle(String dateStr, {String formatStr = "dd/MM/yyyy hh:mm a"} ) {
   var date = stringToDate(dateStr, formatStr: formatStr);
 

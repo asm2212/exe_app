@@ -65,7 +65,26 @@ class _WorkoutTrackerScreenState extends State<WorkoutTrackerScreen> {
               backgroundColor: Colors.transparent,
               centerTitle: true,
               elevation: 0,
-              leadingWidth: 0,
+              leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            height: 40,
+            width: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: ColorExtension.lightGray,
+                borderRadius: BorderRadius.circular(10)),
+            child: Image.asset(
+              "assets/images/black_btn.png",
+              width: 15,
+              height: 15,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
               title: Text('Workout Tracker',
                   style: TextStyle(
                       fontSize: 18,
@@ -88,7 +107,8 @@ class _WorkoutTrackerScreenState extends State<WorkoutTrackerScreen> {
                         fit: BoxFit.contain,
                         height: 12,
                         width: 12,
-                      )),
+                      ),
+                      ),
                 ),
               ],
             ),
@@ -193,7 +213,8 @@ class _WorkoutTrackerScreenState extends State<WorkoutTrackerScreen> {
                         ),
                       ),
                     ),
-                  )),
+                  ),
+                  ),
             ),
           ];
         },
