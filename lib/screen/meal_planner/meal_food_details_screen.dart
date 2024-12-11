@@ -14,8 +14,7 @@ class MealFoodDetailsScreen extends StatefulWidget {
 }
 
 class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
-
-    TextEditingController textSearch = TextEditingController();
+  TextEditingController textSearch = TextEditingController();
 
   List categoryArr = [
     {
@@ -52,12 +51,11 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
     },
   ];
 
-
   List popularArr = [
     {
       "name": "Blueberry Pancake",
       "image": "assets/images/f_1.png",
-      "b_image":"assets/images/pancake_1.png",
+      "b_image": "assets/images/pancake_1.png",
       "size": "Medium",
       "time": "30mins",
       "kcal": "230kCal"
@@ -65,13 +63,12 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
     {
       "name": "Salmon Nigiri",
       "image": "assets/images/f_2.png",
-       "b_image": "assets/images/nigiri.png",
+      "b_image": "assets/images/nigiri.png",
       "size": "Medium",
       "time": "20mins",
       "kcal": "120kCal"
     },
   ];
-
 
   List recommendArr = [
     {
@@ -90,43 +87,19 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
     },
   ];
 
-
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorExtension.white,
-        centerTitle: true,
-        elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            height: 40,
-            width: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: ColorExtension.lightGray,
-                borderRadius: BorderRadius.circular(10)),
-            child: Image.asset(
-              "assets/images/black_btn.png",
-              width: 15,
-              height: 15,
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-        title: Text(
-          widget.eObj["name"].toString(),
-          style: TextStyle(
-              color: ColorExtension.black, fontSize: 19, fontWeight: FontWeight.w700),
-        ),
-        actions: [
-          InkWell(
-            onTap: () {},
+        appBar: AppBar(
+          backgroundColor: ColorExtension.white,
+          centerTitle: true,
+          elevation: 0,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Container(
               margin: const EdgeInsets.all(8),
               height: 40,
@@ -136,15 +109,100 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                   color: ColorExtension.lightGray,
                   borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
-                "assets/images/more_btn.png",
+                "assets/images/black_btn.png",
                 width: 15,
                 height: 15,
                 fit: BoxFit.contain,
               ),
             ),
-          )
-        ],
-      ),
-    );
+          ),
+          title: Text(
+            widget.eObj["name"].toString(),
+            style: TextStyle(
+                color: ColorExtension.black,
+                fontSize: 19,
+                fontWeight: FontWeight.w700),
+          ),
+          actions: [
+            InkWell(
+              onTap: () {},
+              child: Container(
+                margin: const EdgeInsets.all(8),
+                height: 40,
+                width: 40,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: ColorExtension.lightGray,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Image.asset(
+                  "assets/images/more_btn.png",
+                  width: 15,
+                  height: 15,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            )
+          ],
+        ),
+        
+        backgroundColor: ColorExtension.white,
+        
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                    color: ColorExtension.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 2,
+                          offset: Offset(0, 1)),
+                    ]),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: textSearch,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            prefixIcon: Image.asset(
+                              "assets/images/search.png",
+                              width: 30,
+                              height: 30,
+                            ),
+                            hintText: "Search Pancake"),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      width: 1,
+                      height: 25,
+                      color: ColorExtension.gray.withOpacity(0.3),
+                    ),
+                    InkWell(
+                        onTap: () {},
+                        child: Image.asset(
+                          "assets/images/Filter.png",
+                          width: 29,
+                          height: 29,
+                        )
+                        ),
+                  ],
+                ),
+              ),
+               SizedBox(
+              height: media.width * 0.05,
+            ),
+        
+            ],
+          ),
+        ),
+        );
   }
 }
