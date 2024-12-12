@@ -1,5 +1,6 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 
 class FoodInfoDetailsScreen extends StatefulWidget {
   final Map mObj;
@@ -273,6 +274,43 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
                           );
                         }),
                   ),
+                  SizedBox(
+                        height: media.width * 0.05,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "Descriptions",
+                          style: TextStyle(
+                              color: ColorExtension.black,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: ReadMoreText(
+                          'Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being',
+                          trimLines: 4,
+                          colorClickableText: ColorExtension.black,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: ' Read More ...',
+                          trimExpandedText: ' Read Less',
+                          style: TextStyle(
+                            color: ColorExtension.gray,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          moreStyle: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
                 ],
               ),
             ),
