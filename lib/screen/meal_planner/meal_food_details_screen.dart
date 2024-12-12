@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/meal_category_cell.dart';
+import 'package:fit_app/common_widgets/meal_recommend_cell.dart';
 import 'package:flutter/material.dart';
 
 class MealFoodDetailsScreen extends StatefulWidget {
@@ -222,6 +223,33 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                     var cObj = categoryArr[index] as Map? ?? {};
                     return MealCategoryCell(
                       cObj: cObj,
+                      index: index,
+                    );
+                  }),
+            ),
+               SizedBox(
+              height: media.width * 0.05,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                "Recommendation\nfor Diet",
+                style: TextStyle(
+                    color: ColorExtension.black,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+             SizedBox(
+              height: media.width * 0.7,
+              child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: recommendArr.length,
+                  itemBuilder: (context, index) {
+                    var fObj = recommendArr[index] as Map? ?? {};
+                    return MealRecommendCell(
+                      fObj: fObj,
                       index: index,
                     );
                   }),
