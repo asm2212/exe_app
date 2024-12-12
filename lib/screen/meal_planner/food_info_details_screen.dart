@@ -1,4 +1,6 @@
 import 'package:fit_app/common/color_extension.dart';
+import 'package:fit_app/common_widgets/food_step_detail_row.dart';
+import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
@@ -275,41 +277,178 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
                         }),
                   ),
                   SizedBox(
-                        height: media.width * 0.05,
+                    height: media.width * 0.05,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      "Descriptions",
+                      style: TextStyle(
+                          color: ColorExtension.black,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: ReadMoreText(
+                      'Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being',
+                      trimLines: 4,
+                      colorClickableText: ColorExtension.black,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: ' Read More ...',
+                      trimExpandedText: ' Read Less',
+                      style: TextStyle(
+                        color: ColorExtension.gray,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          "Descriptions",
+                      moreStyle: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Ingredients That You\nWill Need",
                           style: TextStyle(
                               color: ColorExtension.black,
                               fontSize: 19,
                               fontWeight: FontWeight.w700),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: ReadMoreText(
-                          'Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being Pancakes are some people\'s favorite breakfast, who doesn\'t like pancakes? Especially with the real honey splash on top of the pancakes, of course everyone loves that! besides being',
-                          trimLines: 4,
-                          colorClickableText: ColorExtension.black,
-                          trimMode: TrimMode.Line,
-                          trimCollapsedText: ' Read More ...',
-                          trimExpandedText: ' Read Less',
-                          style: TextStyle(
-                            color: ColorExtension.gray,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "${stepArr.length} Items",
+                            style: TextStyle(
+                                color: ColorExtension.gray, fontSize: 14),
                           ),
-                          moreStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    height: (media.width * 0.25) + 40,
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: ingredientsArr.length,
+                        itemBuilder: (context, index) {
+                          var nObj = ingredientsArr[index] as Map? ?? {};
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: media.width * 0.23,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: media.width * 0.20,
+                                  height: media.width * 0.20,
+                                  decoration: BoxDecoration(
+                                      color: ColorExtension.lightGray,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    nObj["image"].toString(),
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  nObj["title"].toString(),
+                                  style: TextStyle(
+                                    color: ColorExtension.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  nObj["value"].toString(),
+                                  style: TextStyle(
+                                    color: ColorExtension.gray,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
+                  Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Step by Step",
+                              style: TextStyle(
+                                  color: ColorExtension.black,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "${stepArr.length} Steps",
+                                style:
+                                    TextStyle(color: ColorExtension.gray, fontSize: 14,fontWeight: FontWeight.w500),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
+                                            ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        shrinkWrap: true,
+                        itemCount: stepArr.length,
+                        itemBuilder: ((context, index) {
+                          var sObj = stepArr[index] as Map? ?? {};
+
+                          return FoodStepDetailRow(
+                            sObj: sObj,
+                            isLast: stepArr.last == sObj,
+                          );
+                        }),
+                      ),
+                       SizedBox(
+                        height: media.width * 0.1,
+                      ),
+                       SafeArea(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: RoundButton(
+                            title: "Add to ${widget.mObj["name"]} Meal",
+                            onPressed: () {
+                             
+                            }),
+                      ),
+                    ],
+                  ),
+                ),           SizedBox(
+                        height: media.width * 0.07,
                       ),
                 ],
               ),
