@@ -2,6 +2,7 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/meal_category_cell.dart';
 import 'package:fit_app/common_widgets/meal_recommend_cell.dart';
+import 'package:fit_app/common_widgets/popular_meal_row.dart';
 import 'package:flutter/material.dart';
 
 class MealFoodDetailsScreen extends StatefulWidget {
@@ -186,13 +187,13 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                     color: ColorExtension.gray.withOpacity(0.3),
                   ),
                   InkWell(
-                      onTap: () {},
-                      child: Image.asset(
-                        "assets/images/Filter.png",
-                        width: 29,
-                        height: 29,
-                      ),
-                      ),
+                    onTap: () {},
+                    child: Image.asset(
+                      "assets/images/Filter.png",
+                      width: 29,
+                      height: 29,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -203,14 +204,14 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                 Text(
+                  Text(
                     "Category",
                     style: TextStyle(
                         color: ColorExtension.black,
                         fontSize: 19,
                         fontWeight: FontWeight.w700),
                   ),
-              ],
+                ],
               ),
             ),
             SizedBox(
@@ -225,9 +226,10 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                       cObj: cObj,
                       index: index,
                     );
-                  }),
+                  },
+                  ),
             ),
-               SizedBox(
+            SizedBox(
               height: media.width * 0.05,
             ),
             Padding(
@@ -240,7 +242,7 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                     fontWeight: FontWeight.w700),
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: media.width * 0.7,
               child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -253,6 +255,33 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                       index: index,
                     );
                   }),
+            ),
+            SizedBox(
+              height: media.width * 0.05,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Text(
+                "Popular",
+                style: TextStyle(
+                    color: ColorExtension.black,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: popularArr.length,
+                itemBuilder: (context, index) {
+                  var fObj = popularArr[index] as Map? ?? {};
+                  return PopularMealRow(
+                    mObj: fObj,
+                  );
+                }),
+            SizedBox(
+              height: media.width * 0.05,
             ),
           ],
         ),
