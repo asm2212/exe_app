@@ -163,7 +163,45 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
                     ],
                   ),
                   SizedBox(height: media.width * 0.05),
-            
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.dObj["name"].toString(),
+                                    style: TextStyle(
+                                        color: ColorExtension.black,
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                      SizedBox(height: media.width * 0.02),
+                                  Text(
+                                    "by Asmare Admasu ",
+                                    style: TextStyle(
+                                        color: ColorExtension.gray, 
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Image.asset(
+                                "assets/images/fav.png",
+                                width: 18,
+                                height: 18,
+                                fit: BoxFit.contain,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                 ],
               ),
             ),
