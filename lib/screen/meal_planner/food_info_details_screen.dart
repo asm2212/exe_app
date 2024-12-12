@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class FoodInfoDetailsScreen extends StatefulWidget {
   final Map mObj;
   final Map dObj;
-  const FoodInfoDetailsScreen({super.key, required this.mObj, required this.dObj});
+  const FoodInfoDetailsScreen(
+      {super.key, required this.mObj, required this.dObj});
 
   @override
   State<FoodInfoDetailsScreen> createState() => _FoodInfoDetailsScreenState();
@@ -19,9 +20,17 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
   ];
 
   List ingredientsArr = [
-    {"image": "assets/images/flour.png", "title": "Wheat Flour", "value": "100grm"},
+    {
+      "image": "assets/images/flour.png",
+      "title": "Wheat Flour",
+      "value": "100grm"
+    },
     {"image": "assets/images/sugar.png", "title": "Sugar", "value": "3 tbsp"},
-    {"image": "assets/images/baking_soda.png", "title": "Baking Soda", "value": "2tsp"},
+    {
+      "image": "assets/images/baking_soda.png",
+      "title": "Baking Soda",
+      "value": "2tsp"
+    },
     {"image": "assets/images/eggs.png", "title": "Eggs", "value": "2 items"},
   ];
 
@@ -30,11 +39,13 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
     {"no": "2", "detail": "Mix flour, sugar, salt, and baking powder"},
     {
       "no": "3",
-      "detail": "In a separate place, mix the eggs and liquid milk until blended",
+      "detail":
+          "In a separate place, mix the eggs and liquid milk until blended",
     },
     {
       "no": "4",
-      "detail": "Put the egg and milk mixture into the dry ingredients, Stir until smooth",
+      "detail":
+          "Put the egg and milk mixture into the dry ingredients, Stir until smooth",
     },
     {"no": "5", "detail": "Prepare all of the ingredients that needed again."},
   ];
@@ -43,8 +54,8 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Container(
-      decoration:
-          BoxDecoration(gradient: LinearGradient(colors: ColorExtension.primaryG)),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: ColorExtension.primaryG)),
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -163,45 +174,105 @@ class _FoodInfoDetailsScreenState extends State<FoodInfoDetailsScreen> {
                     ],
                   ),
                   SizedBox(height: media.width * 0.05),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    widget.dObj["name"].toString(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.dObj["name"].toString(),
+                                style: TextStyle(
+                                    color: ColorExtension.black,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              SizedBox(height: media.width * 0.02),
+                              Text(
+                                "by Asmare Admasu ",
+                                style: TextStyle(
+                                    color: ColorExtension.gray,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Image.asset(
+                            "assets/images/fav.png",
+                            width: 18,
+                            height: 18,
+                            fit: BoxFit.contain,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: media.width * 0.08),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      "Nutrition",
+                      style: TextStyle(
+                          color: ColorExtension.black,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  SizedBox(height: media.width * 0.02),
+                  SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: nutritionArr.length,
+                        itemBuilder: (context, index) {
+                          var nObj = nutritionArr[index] as Map? ?? {};
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    ColorExtension.primaryColor2
+                                        .withOpacity(0.4),
+                                    ColorExtension.primaryColor1
+                                        .withOpacity(0.4)
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  nObj["image"].toString(),
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    nObj["title"].toString(),
                                     style: TextStyle(
                                         color: ColorExtension.black,
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                      SizedBox(height: media.width * 0.02),
-                                  Text(
-                                    "by Asmare Admasu ",
-                                    style: TextStyle(
-                                        color: ColorExtension.gray, 
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500),
                                   ),
-                                ],
-                              ),
+                                )
+                              ],
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Image.asset(
-                                "assets/images/fav.png",
-                                width: 18,
-                                height: 18,
-                                fit: BoxFit.contain,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                          );
+                        }),
+                  ),
                 ],
               ),
             ),
