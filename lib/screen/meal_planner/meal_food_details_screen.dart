@@ -3,6 +3,7 @@ import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/meal_category_cell.dart';
 import 'package:fit_app/common_widgets/meal_recommend_cell.dart';
 import 'package:fit_app/common_widgets/popular_meal_row.dart';
+import 'package:fit_app/screen/meal_planner/food_info_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class MealFoodDetailsScreen extends StatefulWidget {
@@ -276,10 +277,24 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                 itemCount: popularArr.length,
                 itemBuilder: (context, index) {
                   var fObj = popularArr[index] as Map? ?? {};
-                  return PopularMealRow(
-                    mObj: fObj,
+                 return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodInfoDetailsScreen(
+                            dObj: fObj,
+                            mObj: widget.eObj,
+                          ),
+                        ),
+                      );
+                    },
+                    child: PopularMealRow(
+                      mObj: fObj,
+                    ),
                   );
-                }),
+                }
+                ),
             SizedBox(
               height: media.width * 0.05,
             ),
