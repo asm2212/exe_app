@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fit_app/common/color_extension.dart';
+import 'package:fit_app/common_widgets/meal_category_cell.dart';
 import 'package:flutter/material.dart';
 
 class MealFoodDetailsScreen extends StatefulWidget {
@@ -92,14 +93,40 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
     var media = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorExtension.white,
-          centerTitle: true,
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
+      appBar: AppBar(
+        backgroundColor: ColorExtension.white,
+        centerTitle: true,
+        elevation: 0,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            height: 40,
+            width: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: ColorExtension.lightGray,
+                borderRadius: BorderRadius.circular(10)),
+            child: Image.asset(
+              "assets/images/black_btn.png",
+              width: 15,
+              height: 15,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        title: Text(
+          widget.eObj["name"].toString(),
+          style: TextStyle(
+              color: ColorExtension.black,
+              fontSize: 19,
+              fontWeight: FontWeight.w700),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {},
             child: Container(
               margin: const EdgeInsets.all(8),
               height: 40,
@@ -109,100 +136,99 @@ class _MealFoodDetailsScreenState extends State<MealFoodDetailsScreen> {
                   color: ColorExtension.lightGray,
                   borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
-                "assets/images/black_btn.png",
+                "assets/images/more_btn.png",
                 width: 15,
                 height: 15,
                 fit: BoxFit.contain,
               ),
             ),
-          ),
-          title: Text(
-            widget.eObj["name"].toString(),
-            style: TextStyle(
-                color: ColorExtension.black,
-                fontSize: 19,
-                fontWeight: FontWeight.w700),
-          ),
-          actions: [
-            InkWell(
-              onTap: () {},
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: ColorExtension.lightGray,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Image.asset(
-                  "assets/images/more_btn.png",
-                  width: 15,
-                  height: 15,
-                  fit: BoxFit.contain,
-                ),
+          )
+        ],
+      ),
+      backgroundColor: ColorExtension.white,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                  color: ColorExtension.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 2,
+                        offset: Offset(0, 1)),
+                  ]),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: textSearch,
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          prefixIcon: Image.asset(
+                            "assets/images/search.png",
+                            width: 30,
+                            height: 30,
+                          ),
+                          hintText: "Search Pancake"),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    width: 1,
+                    height: 25,
+                    color: ColorExtension.gray.withOpacity(0.3),
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      child: Image.asset(
+                        "assets/images/Filter.png",
+                        width: 29,
+                        height: 29,
+                      ),
+                      ),
+                ],
               ),
-            )
+            ),
+            SizedBox(
+              height: media.width * 0.07,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                 Text(
+                    "Category",
+                    style: TextStyle(
+                        color: ColorExtension.black,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w700),
+                  ),
+              ],
+              ),
+            ),
+            SizedBox(
+              height: 120,
+              child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryArr.length,
+                  itemBuilder: (context, index) {
+                    var cObj = categoryArr[index] as Map? ?? {};
+                    return MealCategoryCell(
+                      cObj: cObj,
+                      index: index,
+                    );
+                  }),
+            ),
           ],
         ),
-        
-        backgroundColor: ColorExtension.white,
-        
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                    color: ColorExtension.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 2,
-                          offset: Offset(0, 1)),
-                    ]),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: textSearch,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            prefixIcon: Image.asset(
-                              "assets/images/search.png",
-                              width: 30,
-                              height: 30,
-                            ),
-                            hintText: "Search Pancake"),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      width: 1,
-                      height: 25,
-                      color: ColorExtension.gray.withOpacity(0.3),
-                    ),
-                    InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                          "assets/images/Filter.png",
-                          width: 29,
-                          height: 29,
-                        )
-                        ),
-                  ],
-                ),
-              ),
-               SizedBox(
-              height: media.width * 0.05,
-            ),
-        
-            ],
-          ),
-        ),
-        );
+      ),
+    );
   }
 }
