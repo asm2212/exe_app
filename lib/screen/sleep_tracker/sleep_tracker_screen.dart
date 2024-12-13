@@ -220,6 +220,52 @@ class _SleepTrackerScreenState extends State<SleepTrackerScreen> {
                           ),
                         ),
                         ),
+                  SizedBox(
+                    height: media.width * 0.05,
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    height: media.width * 0.4,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(colors: ColorExtension.primaryG),
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              "Last Night Sleep",
+                              style: TextStyle(
+                                color: ColorExtension.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                             const SizedBox(
+                            height: 6,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              "8h 20m",
+                              style: TextStyle(
+                                  color: ColorExtension.white,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          const Spacer(),
+                          Image.asset(
+                            "assets/images/SleepGraph.png",
+                            width: double.maxFinite,
+                          )
+                        ]),
+                  ),
                   ]
                   ),
             ),
