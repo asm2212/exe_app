@@ -3,6 +3,7 @@ import 'package:calendar_agenda/calendar_agenda.dart';
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/today_sleep_schedule_row.dart';
+import 'package:fit_app/screen/sleep_tracker/sleep_add_alarm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 
@@ -301,7 +302,14 @@ class _SleepScheduleScreenState extends State<SleepScheduleScreen> {
       ),
       floatingActionButton: InkWell(
         onTap: () {
-        
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SleepAddAlarmScreen(
+                date: _selectedDateAppBBar,
+              ),
+            ),
+          );
         },
         child: Container(
           width: 55,
