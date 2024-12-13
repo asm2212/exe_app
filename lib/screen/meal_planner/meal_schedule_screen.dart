@@ -388,10 +388,11 @@ class _MealScheduleScreenState extends State<MealScheduleScreen> {
                     }),
                 SizedBox(
                   height: media.width * 0.05,
-                )
+                ),
               ],
             ),
-          ))
+          ),
+          ),
         ],
       ),
     );

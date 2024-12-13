@@ -1,5 +1,6 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/common_widgets/today_sleep_schedule_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -295,11 +296,39 @@ class _SleepTrackerScreenState extends State<SleepTrackerScreen> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: media.width * 0.05,
+                  ),
+                  Text(
+                    "Today Schedule",
+                    style: TextStyle(
+                        color: ColorExtension.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(
+                    height: media.width * 0.03,
+                  ),
+                  ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: todaySleepArr.length,
+                      itemBuilder: (context, index) {
+                        var sObj = todaySleepArr[index] as Map? ?? {};
+                        return TodaySleepScheduleRow(
+                          sObj: sObj,
+                        );
+                      }),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: media.width * 0.1,
+            ),
             ]),
           ),
-        ]),
-      ),
-    );
+        );
   }
 
   List<LineChartBarData> get lineBarsData1 => [
