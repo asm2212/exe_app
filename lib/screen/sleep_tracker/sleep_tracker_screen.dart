@@ -1,6 +1,7 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fit_app/common_widgets/today_sleep_schedule_row.dart';
+import 'package:fit_app/screen/sleep_tracker/sleep_schedule_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -289,7 +290,14 @@ class _SleepTrackerScreenState extends State<SleepTrackerScreen> {
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             onPressed: () {
-                              
+                                 
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SleepScheduleScreen(),
+                                ),
+                              );
                             },
                           ),
                         )

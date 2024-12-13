@@ -52,14 +52,15 @@ class _TodaySleepScheduleRowState extends State<TodaySleepScheduleRow> {
                         widget.sObj["name"].toString(),
                         style: TextStyle(
                             color: ColorExtension.black,
-                            fontSize: 14,
+                            fontSize: 16,
                             fontWeight: FontWeight.w700),
                       ),
                       Text(
                         ", ${getStringDateToOtherFormate(widget.sObj["time"].toString())}",
                         style: TextStyle(
                           color: ColorExtension.black,
-                          fontSize: 12,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -70,7 +71,7 @@ class _TodaySleepScheduleRowState extends State<TodaySleepScheduleRow> {
                     widget.sObj["duration"].toString(),
                     style: TextStyle(
                         color: ColorExtension.gray,
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500),
                   ),
                 ],
