@@ -3,6 +3,7 @@ import 'package:fit_app/common_widgets/tab_button.dart';
 import 'package:fit_app/screen/home/blank_screen.dart';
 import 'package:fit_app/screen/home/home_screen.dart';
 import 'package:fit_app/screen/main_tab/select_screen.dart';
+import 'package:fit_app/screen/photo_progress/photo_progress_screen.dart';
 import 'package:fit_app/screen/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -101,7 +102,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                   selectIcon: "assets/images/camera_tab_select.png",
                   onTap: () {
                     selectTab = 2;
-                    currentTab = const BlankScreen();
+                    currentTab = const PhotoProgressScreen();
                     if (mounted) {
                       setState(() {});
                     }
