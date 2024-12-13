@@ -14,7 +14,7 @@ class SleepScheduleScreen extends StatefulWidget {
 }
 
 class _SleepScheduleScreenState extends State<SleepScheduleScreen> {
-  CalendarAgendaController _calendarAgendaControllerAppBar =
+  final CalendarAgendaController _calendarAgendaControllerAppBar =
       CalendarAgendaController();
   late DateTime _selectedDateAppBBar;
 
