@@ -229,7 +229,7 @@ class _MealScheduleScreenState extends State<MealScheduleScreen> {
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
