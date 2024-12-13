@@ -1,4 +1,5 @@
 import 'package:fit_app/common/color_extension.dart';
+import 'package:fit_app/common_widgets/round_button.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -41,14 +42,40 @@ class _SleepTrackerScreenState extends State<SleepTrackerScreen> {
     var media = MediaQuery.of(context).size;
     // final tooltipsOnBar = lineBarsData1[0];
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorExtension.white,
-          centerTitle: true,
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
+      appBar: AppBar(
+        backgroundColor: ColorExtension.white,
+        centerTitle: true,
+        elevation: 0,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            height: 40,
+            width: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: ColorExtension.lightGray,
+                borderRadius: BorderRadius.circular(10)),
+            child: Image.asset(
+              "assets/images/black_btn.png",
+              width: 15,
+              height: 15,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        title: Text(
+          "Sleep Tracker",
+          style: TextStyle(
+              color: ColorExtension.black,
+              fontSize: 19,
+              fontWeight: FontWeight.w700),
+        ),
+        actions: [
+          InkWell(
+            onTap: () {},
             child: Container(
               margin: const EdgeInsets.all(8),
               height: 40,
@@ -58,220 +85,221 @@ class _SleepTrackerScreenState extends State<SleepTrackerScreen> {
                   color: ColorExtension.lightGray,
                   borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
-                "assets/images/black_btn.png",
+                "assets/images/more_btn.png",
                 width: 15,
                 height: 15,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          title: Text(
-            "Sleep Tracker",
-            style: TextStyle(
-                color: ColorExtension.black,
-                fontSize: 19,
-                fontWeight: FontWeight.w700),
-          ),
-          actions: [
-            InkWell(
-              onTap: () {},
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                height: 40,
-                width: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: ColorExtension.lightGray,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Image.asset(
-                  "assets/images/more_btn.png",
-                  width: 15,
-                  height: 15,
-                  fit: BoxFit.contain,
+        ],
+      ),
+      backgroundColor: ColorExtension.white,
+      body: SingleChildScrollView(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Container(
+                padding: const EdgeInsets.only(left: 15),
+                height: media.width * 0.5,
+                width: double.maxFinite,
+                child: LineChart(
+                  LineChartData(
+                    // showingTooltipIndicators:
+                    //     showingTooltipOnSpots.map((index) {
+                    //   return ShowingTooltipIndicators([
+                    //     LineBarSpot(
+                    //       tooltipsOnBar,
+                    //       lineBarsData1.indexOf(tooltipsOnBar),
+                    //       tooltipsOnBar.spots[index],
+                    //     ),
+                    //   ]);
+                    // }).toList(),
+                    lineTouchData: LineTouchData(
+                      enabled: true,
+                      handleBuiltInTouches: false,
+                      touchCallback:
+                          (FlTouchEvent event, LineTouchResponse? response) {
+                        if (response == null || response.lineBarSpots == null) {
+                          return;
+                        }
+                        if (event is FlTapUpEvent) {
+                          final spotIndex =
+                              response.lineBarSpots!.first.spotIndex;
+                          showingTooltipOnSpots.clear();
+                          setState(() {
+                            showingTooltipOnSpots.add(spotIndex);
+                          });
+                        }
+                      },
+                      mouseCursorResolver:
+                          (FlTouchEvent event, LineTouchResponse? response) {
+                        if (response == null || response.lineBarSpots == null) {
+                          return SystemMouseCursors.basic;
+                        }
+                        return SystemMouseCursors.click;
+                      },
+                      getTouchedSpotIndicator:
+                          (LineChartBarData barData, List<int> spotIndexes) {
+                        return spotIndexes.map((index) {
+                          return TouchedSpotIndicatorData(
+                            const FlLine(
+                              color: Colors.transparent,
+                            ),
+                            FlDotData(
+                              show: true,
+                              getDotPainter: (spot, percent, barData, index) =>
+                                  FlDotCirclePainter(
+                                radius: 3,
+                                color: Colors.white,
+                                strokeWidth: 1,
+                                strokeColor: ColorExtension.primaryColor2,
+                              ),
+                            ),
+                          );
+                        }).toList();
+                      },
+                      touchTooltipData: LineTouchTooltipData(
+                        getTooltipColor: (touchedSpot) =>
+                            ColorExtension.secondaryColor1,
+                        tooltipRoundedRadius: 5,
+                        getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
+                          return lineBarsSpot.map((lineBarSpot) {
+                            return LineTooltipItem(
+                              "${lineBarSpot.y.toInt()} hours",
+                              const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          }).toList();
+                        },
+                      ),
+                    ),
+                    lineBarsData: lineBarsData1,
+                    minY: -0.01,
+                    maxY: 10.01,
+                    titlesData: FlTitlesData(
+                        show: true,
+                        leftTitles: const AxisTitles(),
+                        topTitles: const AxisTitles(),
+                        bottomTitles: AxisTitles(
+                          sideTitles: bottomTitles,
+                        ),
+                        rightTitles: AxisTitles(
+                          sideTitles: rightTitles,
+                        )),
+                    gridData: FlGridData(
+                      show: true,
+                      drawHorizontalLine: true,
+                      horizontalInterval: 2,
+                      drawVerticalLine: false,
+                      getDrawingHorizontalLine: (value) {
+                        return FlLine(
+                          color: ColorExtension.gray.withOpacity(0.15),
+                          strokeWidth: 2,
+                        );
+                      },
+                    ),
+                    borderData: FlBorderData(
+                      show: true,
+                      border: Border.all(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-        backgroundColor: ColorExtension.white,
-        body: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        padding: const EdgeInsets.only(left: 15),
-                        height: media.width * 0.5,
-                        width: double.maxFinite,
-                        child: LineChart(
-                          LineChartData(
-                            // showingTooltipIndicators:
-                            //     showingTooltipOnSpots.map((index) {
-                            //   return ShowingTooltipIndicators([
-                            //     LineBarSpot(
-                            //       tooltipsOnBar,
-                            //       lineBarsData1.indexOf(tooltipsOnBar),
-                            //       tooltipsOnBar.spots[index],
-                            //     ),
-                            //   ]);
-                            // }).toList(),
-                            lineTouchData: LineTouchData(
-                              enabled: true,
-                              handleBuiltInTouches: false,
-                              touchCallback: (FlTouchEvent event,
-                                  LineTouchResponse? response) {
-                                if (response == null ||
-                                    response.lineBarSpots == null) {
-                                  return;
-                                }
-                                if (event is FlTapUpEvent) {
-                                  final spotIndex =
-                                      response.lineBarSpots!.first.spotIndex;
-                                  showingTooltipOnSpots.clear();
-                                  setState(() {
-                                    showingTooltipOnSpots.add(spotIndex);
-                                  });
-                                }
-                              },
-                              mouseCursorResolver: (FlTouchEvent event,
-                                  LineTouchResponse? response) {
-                                if (response == null ||
-                                    response.lineBarSpots == null) {
-                                  return SystemMouseCursors.basic;
-                                }
-                                return SystemMouseCursors.click;
-                              },
-                              getTouchedSpotIndicator:
-                                  (LineChartBarData barData,
-                                      List<int> spotIndexes) {
-                                return spotIndexes.map((index) {
-                                  return TouchedSpotIndicatorData(
-                                    const FlLine(
-                                      color: Colors.transparent,
-                                    ),
-                                    FlDotData(
-                                      show: true,
-                                      getDotPainter:
-                                          (spot, percent, barData, index) =>
-                                              FlDotCirclePainter(
-                                        radius: 3,
-                                        color: Colors.white,
-                                        strokeWidth: 1,
-                                        strokeColor:
-                                            ColorExtension.primaryColor2,
-                                      ),
-                                    ),
-                                  );
-                                }).toList();
-                              },
-                              touchTooltipData: LineTouchTooltipData(
-                                getTooltipColor: (touchedSpot) =>
-                                    ColorExtension.secondaryColor1,
-                                tooltipRoundedRadius: 5,
-                                getTooltipItems:
-                                    (List<LineBarSpot> lineBarsSpot) {
-                                  return lineBarsSpot.map((lineBarSpot) {
-                                    return LineTooltipItem(
-                                      "${lineBarSpot.y.toInt()} hours",
-                                      const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    );
-                                  }).toList();
-                                },
-                              ),
-                            ),
-                            lineBarsData: lineBarsData1,
-                            minY: -0.01,
-                            maxY: 10.01,
-                            titlesData: FlTitlesData(
-                                show: true,
-                                leftTitles: const AxisTitles(),
-                                topTitles: const AxisTitles(),
-                                bottomTitles: AxisTitles(
-                                  sideTitles: bottomTitles,
-                                ),
-                                rightTitles: AxisTitles(
-                                  sideTitles: rightTitles,
-                                )),
-                            gridData: FlGridData(
-                              show: true,
-                              drawHorizontalLine: true,
-                              horizontalInterval: 2,
-                              drawVerticalLine: false,
-                              getDrawingHorizontalLine: (value) {
-                                return FlLine(
-                                  color: ColorExtension.gray.withOpacity(0.15),
-                                  strokeWidth: 2,
-                                );
-                              },
-                            ),
-                            borderData: FlBorderData(
-                              show: true,
-                              border: Border.all(
-                                color: Colors.transparent,
-                              ),
-                            ),
+              SizedBox(
+                height: media.width * 0.05,
+              ),
+              Container(
+                width: double.maxFinite,
+                height: media.width * 0.4,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: ColorExtension.primaryG),
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "Last Night Sleep",
+                          style: TextStyle(
+                            color: ColorExtension.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          "8h 20m",
+                          style: TextStyle(
+                              color: ColorExtension.white,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500),
                         ),
-                  SizedBox(
+                      ),
+                      const Spacer(),
+                      Image.asset(
+                        "assets/images/SleepGraph.png",
+                        width: double.maxFinite,
+                      )
+                    ]),
+              ),
+              SizedBox(
                     height: media.width * 0.05,
                   ),
                   Container(
-                    width: double.maxFinite,
-                    height: media.width * 0.4,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 15),
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: ColorExtension.primaryG),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 15,
+                      color: ColorExtension.primaryColor2.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Daily Sleep Schedule",
+                          style: TextStyle(
+                              color: ColorExtension.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(
+                          width: 80,
+                          height: 30,
+                          child: RoundButton(
+                            title: "Check",
+                            type: RoundButtonType.bgGradient,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            onPressed: () {
+                              
+                            },
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              "Last Night Sleep",
-                              style: TextStyle(
-                                color: ColorExtension.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                             const SizedBox(
-                            height: 6,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              "8h 20m",
-                              style: TextStyle(
-                                  color: ColorExtension.white,
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          const Spacer(),
-                          Image.asset(
-                            "assets/images/SleepGraph.png",
-                            width: double.maxFinite,
-                          )
-                        ]),
+                        )
+                      ],
+                    ),
                   ),
-                  ]
-                  ),
-            ),
-          ]),
-        ),
-        );
+            ]),
+          ),
+        ]),
+      ),
+    );
   }
 
   List<LineChartBarData> get lineBarsData1 => [
