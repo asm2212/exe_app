@@ -17,3 +17,6 @@ Exe-App is a comprehensive exercise and fitness tracking application designed to
    Sleep Tracker: Monitor sleep patterns to promote better recovery and overall health.
    
    Progress Tracker: Visualize and analyze your fitness progress over time.
+
+   
+<img width="564" alt="Screenshot 2024-12-14 070412" src="https://github.com/user-attachments/assets/899bdf31-cae0-4e94-a346-34ac96ae19c4" />
