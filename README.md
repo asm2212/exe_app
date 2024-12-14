@@ -20,3 +20,7 @@ Exe-App is a comprehensive exercise and fitness tracking application designed to
 
    
 <img width="564" alt="Screenshot 2024-12-14 070412" src="https://github.com/user-attachments/assets/899bdf31-cae0-4e94-a346-34ac96ae19c4" />
+<img width="338" alt="Screenshot 2024-12-14 070635" src="https://github.com/user-attachments/assets/352fd1c1-9b22-43bc-b309-d359d091fa13" />
+<img width="407" alt="Screenshot 2024-12-14 070604" src="https://github.com/user-attachments/assets/2c09e714-5794-4b67-ad27-14cfb4bbb546" />
+<img width="517" alt="Screenshot 2024-12-14 070536" src="https://github.com/user-attachments/assets/1401da5e-86cf-41ab-825c-302a638ab38b" />
+<img width="479" alt="Screenshot 2024-12-14 070505" src="https://github.com/user-attachments/assets/23ccd922-0dda-4fec-bd9e-2a218befd94e" />
