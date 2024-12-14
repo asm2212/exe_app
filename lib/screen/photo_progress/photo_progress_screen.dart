@@ -1,5 +1,6 @@
 import 'package:fit_app/common/color_extension.dart';
 import 'package:fit_app/common_widgets/round_button.dart';
+import 'package:fit_app/screen/photo_progress/comparison_screen.dart';
 import 'package:flutter/material.dart';
 
 class PhotoProgressScreen extends StatefulWidget {
@@ -214,7 +215,13 @@ class _PhotoProgressScreenState extends State<PhotoProgressScreen> {
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           onPressed: () {
-                 
+                   Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ComparisonScreen(),
+                              ),
+                            );
                           },
                         ),
                       )

@@ -43,7 +43,7 @@ class IconTitleNextRow extends StatelessWidget {
             Expanded(
               child: Text(
                 title ,
-                style: TextStyle(color: ColorExtension.gray, fontSize: 14),
+                style: TextStyle(color: ColorExtension.gray, fontSize: 16,fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(
